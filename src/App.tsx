@@ -1,15 +1,16 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter} from 'react-router-dom';
+import {Header} from './Components/Header';
+import {Navbar} from './Components/Navbar';
+import {Profile} from './Components/Profile';
 
-function App() {
+const App = () => {
     return (
-        <BrowserRouter>
-            <div className="App">
-                Hello APP
-            </div>
-        </BrowserRouter>
+        <div className="app-wrapper">
+            <Header/>
+            <Navbar/>
+            <Profile/>
+        </div>
     );
 }
 
