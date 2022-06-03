@@ -10,23 +10,3 @@
             'header header'
             'navigation content';
 }
-
-.header {
-    grid-area: header;
-    background-color: antiquewhite;
-}
-
-.header img {
-    height: 40px;
-    width: auto;
-}
-
-.nav {
-    grid-area: navigation;
-    background-color: aquamarine;
-}
-
-.content {
-    grid-area: content;
-    background-color: burlywood;
-}
