@@ -2,11 +2,3 @@
     grid-area: n;
     background-color: aquamarine;
 }
-
-.item{
-    color: black;
-}
-
-.item.active{
-    color: blue;
-}
