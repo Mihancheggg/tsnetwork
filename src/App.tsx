@@ -15,6 +15,8 @@ const App = () => {
                 <div className="app-wrapper_content">
                     <Route path={'/profile'} render={()=><Profile/>}/>
                     <Route path={'/dialogs'} render={()=><Dialogs/>}/>
+                    {/*<Route path={'/profile'} component={Profile}/>*/}
+                    {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
                 </div>
             </div>
         </BrowserRouter>
