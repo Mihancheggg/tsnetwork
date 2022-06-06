@@ -4,10 +4,11 @@ import {Post} from './Post/Post';
 
 export const MyPosts = () => {
     return (
-        <div>
-            Posts
+        <div className={styles.posts}>
+            <h3>My posts</h3>
             <div>
-                New post
+                <div><textarea></textarea></div>
+                <div><button>Add post</button></div>
             </div>
             <div>
                 <Post message='Hi, how are you?' likes={22}/>
