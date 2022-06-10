@@ -1,0 +1,11 @@
+.dialogItems {
+    padding: 10px;
+}
+
+.dialogItems .active{
+    color: gray;
+}
+
+.dialog {
+ margin-left: 10px;
+}
