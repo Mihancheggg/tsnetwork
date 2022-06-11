@@ -2,7 +2,23 @@ import React from 'react';
 import styles from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 
+type MenuItemsType = Array<MenuItemType>
+
+type MenuItemType = {
+    link: string,
+    name: string,
+}
+
 export const Navbar = () => {
+
+    let menuItems: MenuItemsType = [
+        {link: "/profile", name: 'Profile'},
+        {link: "/dialogs", name: 'Messages'},
+        {link: "/news", name: 'News'},
+        {link: "/music", name: 'Music'},
+        {link: "/settings", name: 'Settings'},
+    ]
+
     return (
         <nav className={styles.nav}>
             <div className={styles.item}>
