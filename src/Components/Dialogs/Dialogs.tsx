@@ -3,12 +3,16 @@ import styles from './Dialogs.module.css';
 import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
 
+export type DialogsPageDataType ={
+    dialogsPageData: DialogsPropsType
+}
+
 export type DialogsPropsType ={
     dialogsData: Array<DialogItemType>,
     messagesData: Array<MessageItemType>
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = (props: DialogsPageDataType) => {
 
     /*let dialogsData: Array<DialogItemType> = [
         {id: v1(), name: 'Vasya'},
@@ -26,14 +30,14 @@ export const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItems}>
-                {props.dialogsData.map(item => <DialogItem name={item.name} id={item.id}/>)}
+                {props.dialogsPageData.dialogsData.map(item => <DialogItem name={item.name} id={item.id}/>)}
                 {/*<DialogItem name="Vasya" id={1}/>*/}
                 {/*<DialogItem name="Kate" id={2}/>*/}
                 {/*<DialogItem name="Leonid" id={3}/>*/}
                 {/*<DialogItem name="Alex" id={4}/>*/}
             </div>
             <div className={styles.messages}>
-                {props.messagesData.map(item => <MessageItem id={item.id} message={item.message}/>)}
+                {props.dialogsPageData.messagesData.map(item => <MessageItem id={item.id} message={item.message}/>)}
                 {/*<MessageItem id={v1()} message="Hi"/>*/}
                 {/*<MessageItem id={v1()} message="How are you?"/>*/}
                 {/*<MessageItem id={v1()} message="Very good"/>*/}

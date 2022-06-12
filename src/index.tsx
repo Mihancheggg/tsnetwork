@@ -7,8 +7,10 @@ import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {v1} from 'uuid';
 import {DialogItemType} from './Components/Dialogs/DialogItem/DialogItem';
 import {MessageItemType} from './Components/Dialogs/MessageItem/MessageItem';
+import state from './Redux/state';
+import {state2} from './Redux/State2';
 
-export let myPostsData: Array<PostType> = [
+/*export let myPostsData: Array<PostType> = [
     {id: v1(), message: 'Hi, how are you?', likes: 22},
     {id: v1(), message: 'Very nice!', likes: 8},
     {id: v1(), message: 'It is my second post', likes: 19},
@@ -26,9 +28,9 @@ export let messagesData: Array<MessageItemType> = [
     {id: v1(), message: "Hi"},
     {id: v1(), message: "How are you?"},
     {id: v1(), message: "Very good"},
-]
+]*/
 
-ReactDOM.render(<App myPostsData={myPostsData} dialogsData={dialogsData} messagesData={messagesData}/>, document.getElementById('root'));
+ReactDOM.render(<App state={state2}/>, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
