@@ -36,6 +36,15 @@ export const Navbar = () => {
             <div className={styles.item}>
                 <NavLink to="/settings" activeClassName={styles.active}>Settings</NavLink>
             </div>
+            <div className={styles.item}>
+                <NavLink to="/friends" activeClassName={styles.active}>Friends</NavLink>
+                <div>
+                    <img src="https://clck.ru/rDhjm" alt=""/>
+                    <img src="https://clck.ru/rDhjm" alt=""/>
+                    <img src="https://clck.ru/rDhjm" alt=""/>
+                </div>
+
+            </div>
         </nav>
     )
 };

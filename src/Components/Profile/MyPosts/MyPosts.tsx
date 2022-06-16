@@ -4,6 +4,7 @@ import {Post, PostType} from './Post/Post';
 
 export type MyPostsDataType= {
     myPostsData: Array<PostType>
+    addPost: (message: string) => void
 }
 
 export const MyPosts = (props: MyPostsDataType) => {
@@ -14,16 +15,26 @@ export const MyPosts = (props: MyPostsDataType) => {
     //     {id: v1(), message: 'It is my first post', likes: 15}
     // ]
 
+    let postsElements = props.myPostsData.map(item => <Post id={item.id} message={item.message} likes={item.likes}/>)
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+
+
+    let addPost = () => {
+        let text = (newPostElement.current ? newPostElement.current.value : '-');
+        props.addPost(text)
+    }
 
     return (
         <div className={styles.posts}>
             <h3>My posts</h3>
             <div>
-                <div><textarea></textarea></div>
-                <div><button>Add post</button></div>
+                <div><textarea ref={newPostElement}></textarea></div>
+                <div><button onClick={addPost}>Add post</button></div>
             </div>
             <div>
-                {props.myPostsData.map(item => <Post id={item.id} message={item.message} likes={item.likes}/>)}
+                {postsElements}
                 {/*<Post message='Hi, how are you?' likes={22}/>*/}
                 {/*<Post message='Very nice!' likes={10}/>*/}
                 {/*<Post message='It is my first post' likes={15}/>*/}

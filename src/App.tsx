@@ -9,12 +9,12 @@ import {News} from './Components/News/News';
 import {Music} from './Components/Music/Music';
 import {Settings} from './Components/Settings/Settings';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
-import {DialogItemType} from './Components/Dialogs/DialogItem/DialogItem';
-import {MessageItemType} from './Components/Dialogs/MessageItem/MessageItem';
-import {StateType} from './Redux/state';
+import {Friends} from './Components/Friends/Friends';
+
 
 export type ReduxToAppPropsType = {
     state: AppPropsType,
+    addPost: (message: string) => void
 }
 
 export type AppPropsType = {
@@ -33,11 +33,12 @@ const App = (props: ReduxToAppPropsType) => {
                     {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
 
-                    <Route path="/profile" render={() => <Profile myPostsData={props.state.myPostsData}/>}/>
+                    <Route path="/profile" render={() => <Profile myPostsData={props.state.myPostsData} addPost={props.addPost}/>}/>
                     <Route path="/dialogs" render={() => <Dialogs dialogsPageData={props.state.dialogsPage}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/friends" render={() => <Friends/>}/>
                 </div>
             </div>
         </BrowserRouter>

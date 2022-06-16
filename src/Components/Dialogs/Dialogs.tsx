@@ -14,34 +14,33 @@ export type DialogsPropsType ={
 
 export const Dialogs = (props: DialogsPageDataType) => {
 
-    /*let dialogsData: Array<DialogItemType> = [
-        {id: v1(), name: 'Vasya'},
-        {id: v1(), name: 'Kate'},
-        {id: v1(), name: 'Leonid'},
-        {id: v1(), name: 'Alex'}
-    ]
+    let newMessageElement = React.createRef<HTMLTextAreaElement>();
 
-    let messagesData: Array<MessageItemType> = [
-        {id: v1(), message: "Hi"},
-        {id: v1(), message: "How are you?"},
-        {id: v1(), message: "Very good"},
-    ]*/
+    const addPost = () => {
+        let text = (newMessageElement.current && newMessageElement.current.value)
+        alert(text)
+    }
 
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItems}>
-                {props.dialogsPageData.dialogsData.map(item => <DialogItem name={item.name} id={item.id}/>)}
+                {props.dialogsPageData.dialogsData.map(item => <DialogItem img={item.img} name={item.name} id={item.id}/>)}
                 {/*<DialogItem name="Vasya" id={1}/>*/}
                 {/*<DialogItem name="Kate" id={2}/>*/}
                 {/*<DialogItem name="Leonid" id={3}/>*/}
                 {/*<DialogItem name="Alex" id={4}/>*/}
             </div>
             <div className={styles.messages}>
-                {props.dialogsPageData.messagesData.map(item => <MessageItem id={item.id} message={item.message}/>)}
+                {props.dialogsPageData.messagesData.map(item => <MessageItem img={item.img} id={item.id} message={item.message}/>)}
                 {/*<MessageItem id={v1()} message="Hi"/>*/}
                 {/*<MessageItem id={v1()} message="How are you?"/>*/}
                 {/*<MessageItem id={v1()} message="Very good"/>*/}
             </div>
+            <div>
+                <textarea ref={newMessageElement}></textarea>
+                <button onClick={addPost}>Add message</button>
+            </div>
+
         </div>
     )
 };

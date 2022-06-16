@@ -3,6 +3,7 @@ import styles from './Profile.module.css';
 import {MyPosts, MyPostsDataType} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
+
 export const Profile = (props: MyPostsDataType) => {
 
     /*let myPostsData: Array<PostType> = [
@@ -14,7 +15,7 @@ export const Profile = (props: MyPostsDataType) => {
     return (
         <div className={styles.profile}>
             <ProfileInfo/>
-            <MyPosts myPostsData={props.myPostsData}/>
+            <MyPosts myPostsData={props.myPostsData} addPost={props.addPost}/>
         </div>
     )
 };
