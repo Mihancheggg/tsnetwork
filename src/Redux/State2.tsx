@@ -2,6 +2,7 @@ import {PostType} from '../Components/Profile/MyPosts/Post/Post';
 import {MessageItemType} from '../Components/Dialogs/MessageItem/MessageItem';
 import {DialogItemType} from '../Components/Dialogs/DialogItem/DialogItem';
 import {v1} from 'uuid';
+import {rerenderEntireTree} from '../Render';
 
 export let state2 = {
     myPostsData: [
@@ -39,4 +40,5 @@ export let state2 = {
 
 export let addPost = (message: string) => {
     /*let newPostState = */state2.myPostsData.push({id: v1(), message: message, likes: 0})
+    rerenderEntireTree(state2)
 }
