@@ -5,12 +5,15 @@ import {v1} from 'uuid';
 import {rerenderEntireTree} from '../Render';
 
 export let state2 = {
-    myPostsData: [
-        {id: v1(), message: 'Hi, how are you?', likes: 22},
-        {id: v1(), message: 'Very nice!', likes: 8},
-        {id: v1(), message: 'It is my second post', likes: 19},
-        {id: v1(), message: 'It is my first post', likes: 15}
-    ],
+    profilePage: {
+        myPostsData: [
+            {id: v1(), message: 'Hi, how are you?', likes: 22},
+            {id: v1(), message: 'Very nice!', likes: 8},
+            {id: v1(), message: 'It is my second post', likes: 19},
+            {id: v1(), message: 'It is my first post', likes: 15}
+        ],
+        newPostText: '',
+    },
     dialogsPage: {
         dialogsData: [
             {id: v1(), name: 'Vasya', img: 'https://live.staticflickr.com/7572/26312703593_c983190d6c_b.jpg'},
@@ -39,6 +42,6 @@ export let state2 = {
 }
 
 export let addPost = (message: string) => {
-    /*let newPostState = */state2.myPostsData.push({id: v1(), message: message, likes: 0})
+    /*let newPostState = */state2.profilePage.myPostsData.push({id: v1(), message: message, likes: 0})
     rerenderEntireTree(state2)
 }

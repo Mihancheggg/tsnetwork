@@ -15,7 +15,7 @@ export const Profile = (props: MyPostsDataType) => {
     return (
         <div className={styles.profile}>
             <ProfileInfo/>
-            <MyPosts myPostsData={props.myPostsData} addPost={props.addPost}/>
+            <MyPosts profilePage={props.profilePage} addPost={props.addPost}/>
         </div>
     )
 };
