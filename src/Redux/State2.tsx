@@ -1,6 +1,3 @@
-import {PostType} from '../Components/Profile/MyPosts/Post/Post';
-import {MessageItemType} from '../Components/Dialogs/MessageItem/MessageItem';
-import {DialogItemType} from '../Components/Dialogs/DialogItem/DialogItem';
 import {v1} from 'uuid';
 import {rerenderEntireTree} from '../Render';
 
@@ -12,7 +9,7 @@ export let state2 = {
             {id: v1(), message: 'It is my second post', likes: 19},
             {id: v1(), message: 'It is my first post', likes: 15}
         ],
-        newPostText: '',
+        newPostText: 'it-kamasutra',
     },
     dialogsPage: {
         dialogsData: [
@@ -41,7 +38,13 @@ export let state2 = {
     }
 }
 
-export let addPost = (message: string) => {
-    /*let newPostState = */state2.profilePage.myPostsData.push({id: v1(), message: message, likes: 0})
+export let addPost = () => {
+    /*let newPostState = */state2.profilePage.myPostsData.push({id: v1(), message: state2.profilePage.newPostText, likes: 0})
+    rerenderEntireTree(state2);
+    updateNewPostText('');
+}
+
+export let updateNewPostText = (newText: string) => {
+    state2.profilePage.newPostText = newText
     rerenderEntireTree(state2)
 }

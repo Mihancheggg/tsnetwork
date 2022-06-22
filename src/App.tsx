@@ -11,10 +11,10 @@ import {Settings} from './Components/Settings/Settings';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
 
-
 export type ReduxToAppPropsType = {
     state: AppPropsType,
-    addPost: (message: string) => void
+    addPost: () => void
+    updateNewPostText: (message: string) => void
 }
 
 export type ProfilePagePropsType = {
@@ -39,7 +39,8 @@ const App = (props: ReduxToAppPropsType) => {
                     <Route path="/settings" component={Settings}/>*/}
 
                     <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
-                                                                  addPost={props.addPost}/>}/>
+                                                                  addPost={props.addPost}
+                                                                  updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path="/dialogs" render={() => <Dialogs dialogsPageData={props.state.dialogsPage}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
