@@ -1,16 +1,13 @@
 import React from 'react';
-import './index.css';
+import ReactDOM from 'react-dom';
+import App, {AppPropsType} from './App';
+import {addPost, state2, subscribe, updateNewPostText} from './Redux/State2';
+import './index.css'
 
-import reportWebVitals from './reportWebVitals';
-
-import {rerenderEntireTree} from './Render';
-import {state2} from './Redux/State2';
+const rerenderEntireTree = (state2: AppPropsType) => {
+    ReactDOM.render(<App updateNewPostText={updateNewPostText} state={state2} addPost={addPost}/>, document.getElementById('root'));
+};
 
 rerenderEntireTree(state2);
 
-
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+subscribe(rerenderEntireTree);

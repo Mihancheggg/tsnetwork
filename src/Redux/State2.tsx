@@ -1,5 +1,9 @@
 import {v1} from 'uuid';
-import {rerenderEntireTree} from '../Render';
+import {AppPropsType} from '../App';
+
+let rerenderEntireTree = (state2: AppPropsType) => {
+    console.log('State was changed')
+}
 
 export let state2 = {
     profilePage: {
@@ -9,7 +13,7 @@ export let state2 = {
             {id: v1(), message: 'It is my second post', likes: 19},
             {id: v1(), message: 'It is my first post', likes: 15}
         ],
-        newPostText: 'it-kamasutra',
+        newPostText: '',
     },
     dialogsPage: {
         dialogsData: [
@@ -38,13 +42,18 @@ export let state2 = {
     }
 }
 
-export let addPost = () => {
-    /*let newPostState = */state2.profilePage.myPostsData.push({id: v1(), message: state2.profilePage.newPostText, likes: 0})
+export const addPost = () => {
+    /*let newPostState = */
+    state2.profilePage.myPostsData.push({id: v1(), message: state2.profilePage.newPostText, likes: 0})
     rerenderEntireTree(state2);
     updateNewPostText('');
 }
 
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state2.profilePage.newPostText = newText
     rerenderEntireTree(state2)
+}
+
+export const subscribe = (observer: (state2: AppPropsType) => void) => {
+    rerenderEntireTree = observer
 }
