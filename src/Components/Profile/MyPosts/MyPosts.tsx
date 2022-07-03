@@ -18,7 +18,7 @@ export const MyPosts = (props: MyPostsDataType) => {
     //     {id: v1(), message: 'It is my first post', likes: 15}
     // ]
 
-    let postsElements = props.profilePage.myPostsData.map(item => <Post id={item.id} message={item.message}
+    let postsElements = props.profilePage.myPostsData.map(item => <Post key={item.id} id={item.id} message={item.message}
                                                                         likes={item.likes}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();

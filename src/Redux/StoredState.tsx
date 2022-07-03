@@ -1,22 +1,22 @@
 import React from 'react';
 import {AppPropsType} from '../App';
 import {v1} from 'uuid';
-import {state2, updateNewPostText} from './State2';
 
 export type StoreType = {
-    rerenderEntireTree: (state2: AppPropsType) => void
-    state2: AppPropsType
-    addPost:()=> void
+    _callSubscriber: () => void
+    _state2: AppPropsType
+    addPost: () => void
     updateNewPostText: (newText: string) => void
-    subscribe: (observer: (state2: AppPropsType) => void) => void
+    subscribe: (observer: () => void) => void
+    getState2: () => AppPropsType;
 }
 
 export let store: StoreType = {
-    rerenderEntireTree(state2: AppPropsType) {
+    _callSubscriber() {
         console.log('State was changed')
     },
 
-    state2: {
+    _state2: {
         profilePage: {
             myPostsData: [
                 {id: v1(), message: 'Hi, how are you?', likes: 22},
@@ -52,18 +52,24 @@ export let store: StoreType = {
             ],
         }
     },
+
+    getState2() {
+        return (this._state2)
+    },
+
     addPost() {
         /*let newPostState = */
-        state2.profilePage.myPostsData.push({id: v1(), message: state2.profilePage.newPostText, likes: 0})
-        this.rerenderEntireTree(state2);
-        updateNewPostText('');
+        this._state2.profilePage.myPostsData.push({id: v1(), message: this._state2.profilePage.newPostText, likes: 0})
+        this._callSubscriber();
+        this.updateNewPostText('');
     },
-    updateNewPostText(newText: string){
-        state2.profilePage.newPostText = newText
-        this.rerenderEntireTree(state2)
-    },
-    subscribe(observer: (state2: AppPropsType) => void) {
-        this.rerenderEntireTree = observer
-    }
 
-}
+    updateNewPostText(newText: string) {
+        this._state2.profilePage.newPostText = newText
+        this._callSubscriber()
+    },
+
+    subscribe(observer: () => void) {
+        this._callSubscriber = observer
+    }
+};
