@@ -15,7 +15,7 @@ export const Profile = (props: MyPostsDataType) => {
     return (
         <div className={styles.profile}>
             <ProfileInfo/>
-            <MyPosts profilePage={props.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} />
+            <MyPosts profilePage={props.profilePage} dispatch={props.dispatch} />
         </div>
     )
 };

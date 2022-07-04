@@ -2,12 +2,17 @@ import React from 'react';
 import styles from './MyPosts.module.css'
 import {Post, PostType} from './Post/Post';
 import {ProfilePagePropsType} from '../../../App';
-import {state2, updateNewPostText} from '../../../Redux/State2';
+import {
+    ActionTypes, addPostActionCreator,
+    AddPostActionType,
+    updateNewPostTextActionCreator,
+    UpdateNewPostTextActionType
+} from '../../../Redux/StoredState';
+import {action} from '@storybook/addon-actions';
 
 export type MyPostsDataType = {
     profilePage: ProfilePagePropsType
-    addPost: () => void
-    updateNewPostText: (message: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 export const MyPosts = (props: MyPostsDataType) => {
@@ -18,19 +23,20 @@ export const MyPosts = (props: MyPostsDataType) => {
     //     {id: v1(), message: 'It is my first post', likes: 15}
     // ]
 
-    let postsElements = props.profilePage.myPostsData.map(item => <Post key={item.id} id={item.id} message={item.message}
+    let postsElements = props.profilePage.myPostsData.map(item => <Post key={item.id} id={item.id}
+                                                                        message={item.message}
                                                                         likes={item.likes}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
-        props.addPost()
+        props.dispatch(addPostActionCreator())
     }
 
     let onTextAreaChangeHandler = () => {
         if (newPostElement.current) {
             let text = (newPostElement.current.value);
-            props.updateNewPostText(text)
+            props.dispatch(updateNewPostTextActionCreator(text))
         }
     }
 

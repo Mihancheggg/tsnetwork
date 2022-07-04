@@ -10,11 +10,11 @@ import {Music} from './Components/Music/Music';
 import {Settings} from './Components/Settings/Settings';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
+import {ActionTypes} from './Redux/StoredState';
 
 export type ReduxToAppPropsType = {
     state: AppPropsType,
-    addPost: () => void
-    updateNewPostText: (message: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 export type ProfilePagePropsType = {
@@ -39,9 +39,10 @@ const App = (props: ReduxToAppPropsType) => {
                     <Route path="/settings" component={Settings}/>*/}
 
                     <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
-                                                                  addPost={props.addPost}
-                                                                  updateNewPostText={props.updateNewPostText}/>}/>
-                    <Route path="/dialogs" render={() => <Dialogs dialogsPageData={props.state.dialogsPage}/>}/>
+                                                                  dispatch={props.dispatch}
+                    />}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogsPageData={props.state.dialogsPage}
+                                                                  dispatch={props.dispatch}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

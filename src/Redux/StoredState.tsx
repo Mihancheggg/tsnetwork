@@ -5,13 +5,42 @@ import {v1} from 'uuid';
 export type StoreType = {
     _callSubscriber: () => void
     _state2: AppPropsType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
     subscribe: (observer: () => void) => void
-    getState2: () => AppPropsType;
+    getState2: () => AppPropsType
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
+};
+
+export type AddPostActionType = {
+    type: 'ADD-POST'
+};
+
+export type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+};
+
+export type UpdateNewMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newText: string
+}
+
+export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageTextActionType;
+
+
+export const addPostActionCreator = (): AddPostActionType => ({type: 'ADD-POST'})
+
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => {
+    return {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+}
+
+export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextActionType => {
+    return {type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text};
 }
 
 export let store: StoreType = {
+    // private info
     _callSubscriber() {
         console.log('State was changed')
     },
@@ -50,26 +79,48 @@ export let store: StoreType = {
                     img: 'https://i.pinimg.com/736x/3c/92/34/3c9234554d0f72bc4b131ae7ee830d20--bunny-bunny-bunny-rabbits.jpg'
                 },
             ],
+            newMessageText: '',
         }
     },
 
+    // state changing methods
     getState2() {
         return (this._state2)
     },
 
-    addPost() {
-        /*let newPostState = */
+    subscribe(observer) {
+        this._callSubscriber = observer
+    },
+
+    // public
+    /*addPost() {
+        /!*let newPostState = *!/
         this._state2.profilePage.myPostsData.push({id: v1(), message: this._state2.profilePage.newPostText, likes: 0})
         this._callSubscriber();
         this.updateNewPostText('');
     },
 
-    updateNewPostText(newText: string) {
+    updateNewPostText(newText) {
         this._state2.profilePage.newPostText = newText
         this._callSubscriber()
-    },
+    },*/
 
-    subscribe(observer: () => void) {
-        this._callSubscriber = observer
+    dispatch(action) { // action - { type: ADD-POST }
+        if (action.type === 'ADD-POST') {
+            this._state2.profilePage.myPostsData.push({
+                id: v1(),
+                message: this._state2.profilePage.newPostText,
+                likes: 0
+            })
+            this._callSubscriber();
+            this._state2.profilePage.newPostText = '';
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state2.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state2.dialogsPage.newMessageText = action.newText
+            this._callSubscriber()
+        }
     }
+
 };
