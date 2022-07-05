@@ -10,7 +10,7 @@ import {Music} from './Components/Music/Music';
 import {Settings} from './Components/Settings/Settings';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
-import {ActionTypes} from './Redux/StoredState';
+import {ActionTypes} from './Redux/Store';
 
 export type ReduxToAppPropsType = {
     state: AppPropsType,

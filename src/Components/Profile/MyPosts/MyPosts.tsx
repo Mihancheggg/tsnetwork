@@ -7,7 +7,7 @@ import {
     AddPostActionType,
     updateNewPostTextActionCreator,
     UpdateNewPostTextActionType
-} from '../../../Redux/StoredState';
+} from '../../../Redux/Store';
 import {action} from '@storybook/addon-actions';
 
 export type MyPostsDataType = {
@@ -29,7 +29,7 @@ export const MyPosts = (props: MyPostsDataType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
+    const addPost = () => {
         props.dispatch(addPostActionCreator())
     }
 
