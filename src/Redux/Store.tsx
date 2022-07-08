@@ -1,6 +1,9 @@
 import React from 'react';
 import {AppPropsType} from '../App';
 import {v1} from 'uuid';
+import {sidebarReducer} from './SidebarReducer';
+import {dialogsReducer} from './DialogsReducer';
+import {profileReducer} from './ProfileReducer';
 
 export type StoreType = {
     _callSubscriber: () => void
@@ -35,19 +38,6 @@ export type ActionTypes =
     | UpdateNewPostTextActionType
     | UpdateNewMessageTextActionType
     | AddMessageActionType;
-
-
-export const addPostActionCreator = (): AddPostActionType => ({type: 'ADD-POST'})
-
-export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-}
-
-export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextActionType => {
-    return {type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text};
-}
-
-export const addMessageActionCreator = (): AddMessageActionType => ({type: 'ADD-MESSAGE'})
 
 export let store: StoreType = {
     // private info
@@ -90,7 +80,8 @@ export let store: StoreType = {
                 },
             ],
             newMessageText: '',
-        }
+        },
+        sidebar: {}
     },
 
     // state changing methods
@@ -116,7 +107,14 @@ export let store: StoreType = {
     },*/
 
     dispatch(action) { // action - { type: ADD-POST }
-        if (action.type === 'ADD-POST') {
+
+        this._state2.profilePage = profileReducer(this._state2.profilePage, action)
+        this._state2.dialogsPage = dialogsReducer(this._state2.dialogsPage, action)
+        this._state2.sidebar = sidebarReducer(this._state2.sidebar, action)
+
+        this._callSubscriber();
+
+        /*if (action.type === 'ADD-POST') {
             this._state2.profilePage.myPostsData.push({
                 id: v1(),
                 message: this._state2.profilePage.newPostText,
@@ -138,7 +136,7 @@ export let store: StoreType = {
             })
             this._callSubscriber();
             this._state2.dialogsPage.newMessageText = '';
-        }
+        }*/
     }
 
 };

@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from './MyPosts.module.css'
-import {Post, PostType} from './Post/Post';
+import {Post} from './Post/Post';
 import {ProfilePagePropsType} from '../../../App';
-import {
-    ActionTypes, addPostActionCreator,
-    AddPostActionType,
-    updateNewPostTextActionCreator,
-    UpdateNewPostTextActionType
-} from '../../../Redux/Store';
-import {action} from '@storybook/addon-actions';
+import {ActionTypes} from '../../../Redux/Store';
+import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../Redux/ProfileReducer';
+
 
 export type MyPostsDataType = {
     profilePage: ProfilePagePropsType

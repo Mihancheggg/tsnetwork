@@ -25,6 +25,7 @@ export type ProfilePagePropsType = {
 export type AppPropsType = {
     profilePage: ProfilePagePropsType,
     dialogsPage: DialogsPropsType,
+    sidebar: {}
 }
 
 const App = (props: ReduxToAppPropsType) => {

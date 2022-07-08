@@ -40,7 +40,8 @@ let state2 = {
             },
         ],
         newMessageText: '',
-    }
+    },
+    sidebar: {}
 }
 
 export const addPost = () => {
