@@ -1,12 +1,13 @@
 import React from 'react';
 import {AppPropsType} from '../App';
 import {v1} from 'uuid';
-import {sidebarReducer} from './SidebarReducer';
-import {dialogsReducer} from './DialogsReducer';
-import {profileReducer} from './ProfileReducer';
+import {sidebarReducer} from './Reducers/SidebarReducer';
+import {dialogsReducer, DialogsReducerActionTypes} from './Reducers/DialogsReducer';
+import {profileReducer, ProfileReducerActionTypes} from './Reducers/ProfileReducer';
+import {StateType} from './state';
 
-export type StoreType = {
-    _callSubscriber: () => void
+type StoreType = {
+    _callSubscriber: (_state2: AppPropsType) => void
     _state2: AppPropsType
     subscribe: (observer: () => void) => void
     getState2: () => AppPropsType
@@ -15,31 +16,29 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 };
 
-export type AddPostActionType = {
+type AddPostActionType = {
     type: 'ADD-POST'
 };
 
-export type UpdateNewPostTextActionType = {
+type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 };
 
-export type UpdateNewMessageTextActionType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT',
-    newText: string
-};
+// type UpdateNewMessageTextActionType = {
+//     type: 'UPDATE-NEW-MESSAGE-TEXT',
+//     newText: string
+// };
+//
+// type AddMessageActionType = {
+//     type: 'ADD-MESSAGE'
+// };
 
-export type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-};
+type ActionTypes =
+    ProfileReducerActionTypes
+    | DialogsReducerActionTypes;
 
-export type ActionTypes =
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageTextActionType
-    | AddMessageActionType;
-
-export let store: StoreType = {
+let store: StoreType = {
     // private info
     _callSubscriber() {
         console.log('State was changed')
@@ -108,11 +107,11 @@ export let store: StoreType = {
 
     dispatch(action) { // action - { type: ADD-POST }
 
-        this._state2.profilePage = profileReducer(this._state2.profilePage, action)
-        this._state2.dialogsPage = dialogsReducer(this._state2.dialogsPage, action)
-        this._state2.sidebar = sidebarReducer(this._state2.sidebar, action)
+        // this._state2.profilePage = profileReducer(this._state2.profilePage, action)
+        // this._state2.dialogsPage = dialogsReducer(this._state2.dialogsPage, action)
+        // this._state2.sidebar = sidebarReducer(this._state2.sidebar, action)
 
-        this._callSubscriber();
+        this._callSubscriber(this._state2);
 
         /*if (action.type === 'ADD-POST') {
             this._state2.profilePage.myPostsData.push({

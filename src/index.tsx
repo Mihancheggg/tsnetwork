@@ -2,15 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css'
-import {store} from './Redux/Store';
+import {RootStateType, store} from './Redux/ReduxStore';
 
-const rerenderEntireTree = () => {
-    ReactDOM.render(<App
+const rerenderEntireTree = (state: RootStateType) => {
+    ReactDOM.render(
+        <App
             dispatch={store.dispatch.bind(store)}
-            state={store.getState2()}/>,
+            state={state}/>,
         document.getElementById('root'));
-};
+}
 
-rerenderEntireTree();
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireTree(state)
+})
+
+rerenderEntireTree(store.getState())

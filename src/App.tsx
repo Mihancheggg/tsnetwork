@@ -10,11 +10,14 @@ import {Music} from './Components/Music/Music';
 import {Settings} from './Components/Settings/Settings';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
-import {ActionTypes} from './Redux/Store';
+import {RootStateType} from './Redux/ReduxStore';
+import {DialogsReducerActionTypes} from './Redux/Reducers/DialogsReducer';
+import {ProfileReducerActionTypes} from './Redux/Reducers/ProfileReducer';
+import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 
 export type ReduxToAppPropsType = {
-    state: AppPropsType,
-    dispatch: (action: ActionTypes) => void
+    state: RootStateType,
+    dispatch: (action: DialogsReducerActionTypes | ProfileReducerActionTypes) => void
 }
 
 export type ProfilePagePropsType = {
@@ -39,10 +42,10 @@ const App = (props: ReduxToAppPropsType) => {
                     {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
 
-                    <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
+                    <Route path="/profile" render={() => <Profile profilePage={props.state.profileReducer}
                                                                   dispatch={props.dispatch}
                     />}/>
-                    <Route path="/dialogs" render={() => <Dialogs dialogsPageData={props.state.dialogsPage}
+                    <Route path="/dialogs" render={() => <DialogsContainer dialogsPageData={props.state.dialogsReducer}
                                                                   dispatch={props.dispatch}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>

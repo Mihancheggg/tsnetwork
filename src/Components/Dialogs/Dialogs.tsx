@@ -2,12 +2,11 @@ import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css';
 import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
-import {ActionTypes} from '../../Redux/Store';
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../Redux/DialogsReducer';
 
 export type DialogsPageDataType = {
     dialogsPageData: DialogsPropsType
-    dispatch: (action: ActionTypes) => void
+    addMessage: () => void
+    updateTextAreaValue: (text: string) => void
 }
 
 export type DialogsPropsType = {
@@ -20,11 +19,11 @@ export const Dialogs = (props: DialogsPageDataType) => {
 
     const onTextAreaChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = (e.currentTarget.value)
-        props.dispatch(updateNewMessageTextActionCreator(text))
+        props.updateTextAreaValue(text)
     }
 
     const addMessage = () => {
-        props.dispatch(addMessageActionCreator())
+        props.addMessage()
     }
 
     return (
