@@ -4,7 +4,10 @@ import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
 
 export type DialogsPageDataType = {
-    dialogsPageData: DialogsPropsType
+    //dialogsPageData: DialogsPropsType
+    dialogsData: Array<DialogItemType>
+    messagesData: Array<MessageItemType>
+    newMessageText: string
     addMessage: () => void
     updateTextAreaValue: (text: string) => void
 }
@@ -29,8 +32,8 @@ export const Dialogs = (props: DialogsPageDataType) => {
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItems}>
-                {props.dialogsPageData.dialogsData.map(item => <DialogItem img={item.img} name={item.name}
-                                                                           id={item.id}/>)}
+                {props.dialogsData.map(item => <DialogItem key={item.id} img={item.img} name={item.name}
+                                                           id={item.id}/>)}
                 {/*<DialogItem name="Vasya" id={1}/>*/}
                 {/*<DialogItem name="Kate" id={2}/>*/}
                 {/*<DialogItem name="Leonid" id={3}/>*/}
@@ -39,13 +42,13 @@ export const Dialogs = (props: DialogsPageDataType) => {
             <div className={styles.messages}>
 
                 <div>
-                    {props.dialogsPageData.messagesData.map(item => <MessageItem img={item.img}
-                                                                                 id={item.id}
-                                                                                 message={item.message}/>)}
+                    {props.messagesData.map(item => <MessageItem key={item.id} img={item.img}
+                                                                 id={item.id}
+                                                                 message={item.message}/>)}
                 </div>
 
                 <div>
-                    <textarea value={props.dialogsPageData.newMessageText}
+                    <textarea value={props.newMessageText}
                               onChange={onTextAreaChangeHandler}/>
                     <div>
                         <button onClick={addMessage}>Add message</button>

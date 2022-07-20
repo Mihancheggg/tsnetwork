@@ -1,18 +1,20 @@
 import React from 'react';
 import styles from './MyPosts.module.css'
-import {Post} from './Post/Post';
+import {Post, PostType} from './Post/Post';
 import {ProfilePagePropsType} from '../../../App';
 
 
 export type MyPostsDataType = {
-    profilePage: ProfilePagePropsType
+    //profilePage: ProfilePagePropsType
+    myPostsData: Array<PostType>
+    newPostText: string
     addPost: ()=> void
     updateNewPostText: (text: string)=> void
 }
 
 export const MyPosts = (props: MyPostsDataType) => {
 
-    let postsElements = props.profilePage.myPostsData.map(item => <Post key={item.id} id={item.id}
+    let postsElements = props.myPostsData.map(item => <Post key={item.id} id={item.id}
                                                                         message={item.message}
                                                                         likes={item.likes}/>)
 
@@ -36,7 +38,7 @@ export const MyPosts = (props: MyPostsDataType) => {
             <h3>My posts</h3>
             <div>
                 <div><textarea onChange={onTextAreaChangeHandler} ref={newPostElement}
-                               value={props.profilePage.newPostText}/></div>
+                               value={props.newPostText}/></div>
                 <div>
                     <button onClick={addPost}>Add post</button>
                 </div>

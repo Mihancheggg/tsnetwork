@@ -31,7 +31,7 @@ export type AppPropsType = {
     sidebar: {}
 }
 
-const App = (props: ReduxToAppPropsType) => {
+const App = (/*props: ReduxToAppPropsType*/) => {
 
     return (
         <BrowserRouter>
@@ -42,11 +42,10 @@ const App = (props: ReduxToAppPropsType) => {
                     {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
 
-                    <Route path="/profile" render={() => <Profile profilePage={props.state.profileReducer}
-                                                                  dispatch={props.dispatch}
+                    <Route path="/profile" render={() => <Profile //profilePage={props.state.profileReducer} dispatch={props.dispatch}
                     />}/>
-                    <Route path="/dialogs" render={() => <DialogsContainer dialogsPageData={props.state.dialogsReducer}
-                                                                  dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer //dialogsPageData={props.state.dialogsReducer} dispatch={props.dispatch}
+                    />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

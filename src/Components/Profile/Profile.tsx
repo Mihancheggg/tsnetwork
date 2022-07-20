@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './Profile.module.css';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {MyPostsContainer, MyPostsContainerDataType} from './MyPosts/MyPostsContainer';
+import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
 
-export const Profile = (props: MyPostsContainerDataType) => {
+export const Profile = (/*props: MyPostsContainerDataType*/) => {
 
     /*let myPostsData: Array<PostType> = [
         {id: v1(), message: 'Hi, how are you?', likes: 22},
@@ -15,7 +15,8 @@ export const Profile = (props: MyPostsContainerDataType) => {
     return (
         <div className={styles.profile}>
             <ProfileInfo/>
-            <MyPostsContainer profilePage={props.profilePage} dispatch={props.dispatch} />
+            <MyPostsContainer //profilePage={props.profilePage} dispatch={props.dispatch}
+            />
         </div>
     )
 };
