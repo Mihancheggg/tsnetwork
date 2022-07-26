@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
 
-let initialState = {
+let initialState: ProfilePagePropsType = {
     myPostsData: [
         {id: v1(), message: 'Hi, how are you?', likes: 22},
         {id: v1(), message: 'Very nice!', likes: 8},
@@ -23,16 +23,17 @@ export const updateNewPostTextActionCreator = (text: string) => {
     return {type: 'UPDATE-NEW-POST-TEXT', newText: text} as const;
 }
 
-export const profileReducer = (state: ProfilePagePropsType = initialState, action: ProfileReducerActionTypes) => {
+export const profileReducer = (state: ProfilePagePropsType = initialState, action: ProfileReducerActionTypes): ProfilePagePropsType => {
     switch (action.type) {
         case 'ADD-POST':
-            state.myPostsData.push({
-                id: v1(),
-                message: state.newPostText,
-                likes: 0
-            })
-            state.newPostText = ''
-            return state
+            return {
+                ...state, myPostsData: [...state.myPostsData,
+                    {
+                        id: v1(),
+                        message: state.newPostText,
+                        likes: 0
+                    }], newPostText: ''
+            }
         case 'UPDATE-NEW-POST-TEXT':
             return {...state, newPostText: action.newText}
         default:

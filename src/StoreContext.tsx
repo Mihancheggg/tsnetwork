@@ -7,14 +7,14 @@ import {ReduxStoreType, RootStateType} from './Redux/ReduxStore';
     getState: ()=> RootStateType
 }*/
 
-export const StoreContext = React.createContext({} as ReduxStoreType)
+const StoreContext = React.createContext({} as ReduxStoreType)
 
-export type ProviderPropsType = {
+type ProviderPropsType = {
     store: ReduxStoreType
     children: React.ReactNode
 }
 
-export const Provider = (props: ProviderPropsType) => {
+const Provider = (props: ProviderPropsType) => {
     return <StoreContext.Provider value={props.store}>
                 {props.children}
             </StoreContext.Provider>
