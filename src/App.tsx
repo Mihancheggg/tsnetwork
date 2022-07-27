@@ -14,11 +14,13 @@ import {RootStateType} from './Redux/ReduxStore';
 import {DialogsReducerActionTypes} from './Redux/Reducers/DialogsReducer';
 import {ProfileReducerActionTypes} from './Redux/Reducers/ProfileReducer';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
+import {Users} from './Components/Users/Users';
+import {UsersContainer} from './Components/Users/UsersContainer';
 
-export type ReduxToAppPropsType = {
+/*export type ReduxToAppPropsType = {
     state: RootStateType,
     dispatch: (action: DialogsReducerActionTypes | ProfileReducerActionTypes) => void
-}
+}*/
 
 export type ProfilePagePropsType = {
     myPostsData: Array<PostType>,
@@ -45,7 +47,7 @@ const App = (/*props: ReduxToAppPropsType*/) => {
                     <Route path="/profile" render={() => <Profile //profilePage={props.state.profileReducer} dispatch={props.dispatch}
                     />}/>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/> {/*dialogsPageData={props.state.dialogsReducer} dispatch={props.dispatch}*/}
-
+                    <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

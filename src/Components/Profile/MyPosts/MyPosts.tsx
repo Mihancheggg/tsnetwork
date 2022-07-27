@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './MyPosts.module.css'
 import {Post, PostType} from './Post/Post';
 import {ProfilePagePropsType} from '../../../App';
+import {MyPostsContainerDataType} from './MyPostsContainer';
 
 
 export type MyPostsDataType = {
@@ -12,7 +13,7 @@ export type MyPostsDataType = {
     updateNewPostText: (text: string)=> void
 }
 
-export const MyPosts = (props: MyPostsDataType) => {
+export const MyPosts = (props: MyPostsContainerDataType) => {
 
     let postsElements = props.myPostsData.map(item => <Post key={item.id} id={item.id}
                                                                         message={item.message}

@@ -14,6 +14,7 @@ export const Navbar = () => {
     let menuItems: MenuItemsType = [
         {link: "/profile", name: 'Profile'},
         {link: "/dialogs", name: 'Messages'},
+        {link: "/users", name: 'Users'},
         {link: "/news", name: 'News'},
         {link: "/music", name: 'Music'},
         {link: "/settings", name: 'Settings'},
@@ -26,6 +27,9 @@ export const Navbar = () => {
             </div>
             <div className={styles.item}>
                 <NavLink to="/dialogs" activeClassName={styles.active}>Messages</NavLink>
+            </div>
+            <div className={styles.item}>
+                <NavLink to="/users" activeClassName={styles.active}>Users</NavLink>
             </div>
             <div className={styles.item}>
                 <NavLink to="/news" activeClassName={styles.active}>News</NavLink>

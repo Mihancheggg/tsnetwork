@@ -8,14 +8,10 @@ import {Dialogs, DialogsPropsType} from './Dialogs';
 //import {StoreContext} from '../../StoreContext';
 import {AppPropsType} from '../../Redux/ReduxStore';
 import {connect} from 'react-redux';
-import { compose } from 'redux';
-import {MyPosts} from '../Profile/MyPosts/MyPosts';
+import {compose, Dispatch} from 'redux';
 
 
-export type DialogsContainerDataType = {
-    dialogsPageData: DialogsPropsType
-    dispatch: (action: DialogsReducerActionTypes) => void
-}
+export type DialogsContainerDataType = DialogsPropsType & MapDispatchPropsType
 
 /*export const DialogsContainer = (/!*props: DialogsContainerDataType*!/) => {
 
@@ -55,6 +51,11 @@ export type DialogsContainerDataType = {
     )
 };*/
 
+type MapDispatchPropsType = {
+    addMessage: () => void
+    updateTextAreaValue: (text: string) => void
+}
+
 let mapStateToProps = (state: AppPropsType): DialogsPropsType => {
     return {
         dialogsData: state.dialogsReducer.dialogsData,
@@ -63,7 +64,7 @@ let mapStateToProps = (state: AppPropsType): DialogsPropsType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addMessage: () => {
             dispatch(addMessageActionCreator())

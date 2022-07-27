@@ -2,15 +2,16 @@ import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css';
 import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
+import {DialogsContainerDataType} from './DialogsContainer';
 
-export type DialogsPageDataType = {
+/*export type DialogsPageDataType = {
     //dialogsPageData: DialogsPropsType
     dialogsData: Array<DialogItemType>
     messagesData: Array<MessageItemType>
     newMessageText: string
     addMessage: () => void
     updateTextAreaValue: (text: string) => void
-}
+}*/
 
 export type DialogsPropsType = {
     dialogsData: Array<DialogItemType>,
@@ -18,7 +19,7 @@ export type DialogsPropsType = {
     newMessageText: string,
 }
 
-export const Dialogs = (props: DialogsPageDataType) => {
+export const Dialogs = (props: DialogsContainerDataType) => {
 
     const onTextAreaChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = (e.currentTarget.value)
@@ -28,7 +29,6 @@ export const Dialogs = (props: DialogsPageDataType) => {
     const addMessage = () => {
         props.addMessage()
     }
-
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItems}>
