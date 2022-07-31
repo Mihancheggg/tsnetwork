@@ -6,9 +6,13 @@ import {UsersType} from '../../Redux/Reducers/UsersReducer';
 import {UsersContainerDataType} from './UsersContainer';
 
 export class UsersClass extends React.Component<UsersContainerDataType, UsersType> {
-    constructor(props: UsersContainerDataType) {
-        super(props);
 
+    /*constructor(props: UsersContainerDataType) {
+        super(props);
+    }*/
+    //super - переброска пропсов прототипу. Если кроме этого конструктор ничего не делает, можно не писать
+
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             this.props.setUsers(response.data.items)
         })
