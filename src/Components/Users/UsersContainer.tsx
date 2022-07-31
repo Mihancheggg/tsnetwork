@@ -2,7 +2,7 @@ import React from 'react';
 import {AppPropsType} from '../../Redux/ReduxStore';
 import {connect} from 'react-redux';
 import {compose, Dispatch} from 'redux';
-import {Users} from './Users';
+import {UsersClass} from './UsersClass';
 import {followUserAC, setUsersAC, unfollowUserAC, UsersType, UserType} from '../../Redux/Reducers/UsersReducer';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
@@ -34,4 +34,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 }
 
 
-export const UsersContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(Users)
+export const UsersContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(UsersClass)

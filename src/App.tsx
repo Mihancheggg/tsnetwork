@@ -3,18 +3,14 @@ import './App.css';
 import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
 import {Profile} from './Components/Profile/Profile';
-import {Dialogs, DialogsPropsType} from './Components/Dialogs/Dialogs';
+import {DialogsPropsType} from './Components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './Components/News/News';
 import {Music} from './Components/Music/Music';
 import {Settings} from './Components/Settings/Settings';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
-import {RootStateType} from './Redux/ReduxStore';
-import {DialogsReducerActionTypes} from './Redux/Reducers/DialogsReducer';
-import {ProfileReducerActionTypes} from './Redux/Reducers/ProfileReducer';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
-import {Users} from './Components/Users/Users';
 import {UsersContainer} from './Components/Users/UsersContainer';
 
 /*export type ReduxToAppPropsType = {

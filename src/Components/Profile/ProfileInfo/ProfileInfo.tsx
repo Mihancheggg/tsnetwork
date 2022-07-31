@@ -7,7 +7,7 @@ export const ProfileInfo = () => {
             <div className={styles.content_image}>
                 <img
                     src="https://obustroeno.club/wp-content/uploads/2016/08/morskie-kamni-mogut-obladat-razlichnymi-ottenkami-chto-v-znachit-1024x640.jpg"
-                    alt=""/>
+                    alt="It must be a picture here"/>
             </div>
             <div className={styles.description}>Avatar & description</div>
         </div>
