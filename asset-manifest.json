@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/tsnetwork/static/css/main.b0db16fc.css",
+    "main.js": "/tsnetwork/static/js/main.fb237563.js",
+    "static/media/user_image.png": "/tsnetwork/static/media/user_image.da8b6684f648e3f39f08.png",
+    "index.html": "/tsnetwork/index.html",
+    "main.b0db16fc.css.map": "/tsnetwork/static/css/main.b0db16fc.css.map",
+    "main.fb237563.js.map": "/tsnetwork/static/js/main.fb237563.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0db16fc.css",
+    "static/js/main.fb237563.js"
+  ]
+}
