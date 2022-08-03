@@ -1,7 +1,6 @@
 import React from 'react';
 import {UsersContainerDataType} from './UsersContainer';
 import styles from './Users.module.css'
-import {v1} from 'uuid';
 import axios from 'axios';
 import user_image from './../../Assets/Images/user_image.png'
 
@@ -10,7 +9,7 @@ export const Users = (props: UsersContainerDataType) => {
     const getUsers = () => {
         if (props.users.length === 0) {
 
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users?page=2&count=3').then(response => {
                 props.setUsers(response.data.items)
             })
         }
