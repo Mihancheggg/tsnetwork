@@ -1,6 +1,28 @@
 import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
 
+export type ProfileFromServerPropsType ={
+    aboutMe?: string
+    contacts: {
+        facebook?: string,
+        website?: string,
+        vk?: string,
+        twitter?: string,
+        instagram?: string,
+        youtube?: string,
+        github?: string,
+        mainLink?: string
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos?: {
+        small?: string,
+        large?: string
+    }
+}
+
 let initialState: ProfilePagePropsType = {
     myPostsData: [
         {id: v1(), message: 'Hi, how are you?', likes: 22},
@@ -9,18 +31,25 @@ let initialState: ProfilePagePropsType = {
         {id: v1(), message: 'It is my first post', likes: 15}
     ],
     newPostText: '',
+    profile: null
 };
 
-export type ProfileReducerActionTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ProfileReducerActionTypes = AddPostActionType | UpdateNewPostTextActionType | setUserProfileType
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
+
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
+export type setUserProfileType = ReturnType<typeof setUserProfile>
 
 export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
 
 export const updateNewPostTextActionCreator = (text: string) => {
     return {type: 'UPDATE-NEW-POST-TEXT', newText: text} as const;
+}
+
+export const setUserProfile = (profile: ProfileFromServerPropsType) => {
+    return {type: 'SET-USER-PROFILE', profile} as const;
 }
 
 export const profileReducer = (state: ProfilePagePropsType = initialState, action: ProfileReducerActionTypes): ProfilePagePropsType => {
@@ -36,6 +65,8 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
             }
         case 'UPDATE-NEW-POST-TEXT':
             return {...state, newPostText: action.newText}
+        case 'SET-USER-PROFILE':
+            return {...state, profile: action.profile}
         default:
             return state
     }

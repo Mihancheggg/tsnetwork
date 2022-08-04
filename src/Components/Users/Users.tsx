@@ -50,8 +50,8 @@ export const Users = (props: UsersContainerDataType) => {
             {props.users.map(el => <div key={el.id}>
                 <span>
                     <div>
-                        <img src={el.photos.small !== null ? el.photos.small : user_image} alt=""
-                             className={styles.photo}/>
+                            <img src={el.photos.small !== null ? el.photos.small : user_image} alt=""
+                                 className={styles.photo}/>
                     </div>
                     <div>
                         {el.followed

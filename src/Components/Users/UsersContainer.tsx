@@ -18,7 +18,7 @@ import {Preloader} from '../Common/Preloader/Preloader';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
 
-class UsersClassAPI extends React.Component<UsersContainerDataType, UsersType> {
+class UsersClassAPI extends React.Component<UsersContainerDataType, {}> {
 
     /*constructor(props: UsersContainerDataType) {
         super(props);

@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
-import {Profile} from './Components/Profile/Profile';
 import {DialogsPropsType} from './Components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './Components/News/News';
@@ -12,6 +11,8 @@ import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 import {UsersContainer} from './Components/Users/UsersContainer';
+import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
+import {ProfileFromServerPropsType} from './Redux/Reducers/ProfileReducer';
 
 /*export type ReduxToAppPropsType = {
     state: RootStateType,
@@ -21,6 +22,7 @@ import {UsersContainer} from './Components/Users/UsersContainer';
 export type ProfilePagePropsType = {
     myPostsData: Array<PostType>,
     newPostText: string
+    profile: ProfileFromServerPropsType | null
 }
 
 export type AppPropsType = {
@@ -40,8 +42,7 @@ const App = (/*props: ReduxToAppPropsType*/) => {
                     {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
 
-                    <Route path="/profile" render={() => <Profile //profilePage={props.state.profileReducer} dispatch={props.dispatch}
-                    />}/>
+                    <Route path="/profile" render={() => <ProfileContainerAPI />}/>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/> {/*dialogsPageData={props.state.dialogsReducer} dispatch={props.dispatch}*/}
                     <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>

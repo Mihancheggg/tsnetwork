@@ -1,12 +1,7 @@
-import React from 'react';
-import {AppPropsType} from '../App';
-import {v1} from 'uuid';
-import {sidebarReducer} from './Reducers/SidebarReducer';
-import {dialogsReducer, DialogsReducerActionTypes} from './Reducers/DialogsReducer';
-import {profileReducer, ProfileReducerActionTypes} from './Reducers/ProfileReducer';
-import {StateType} from './state';
+import {DialogsReducerActionTypes} from './Reducers/DialogsReducer';
+import {ProfileReducerActionTypes} from './Reducers/ProfileReducer';
 
-type StoreType = {
+/*type StoreType = {
     _callSubscriber: (_state2: AppPropsType) => void
     _state2: AppPropsType
     subscribe: (observer: () => void) => void
@@ -23,7 +18,7 @@ type AddPostActionType = {
 type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
-};
+};*/
 
 // type UpdateNewMessageTextActionType = {
 //     type: 'UPDATE-NEW-MESSAGE-TEXT',
@@ -34,11 +29,11 @@ type UpdateNewPostTextActionType = {
 //     type: 'ADD-MESSAGE'
 // };
 
-type ActionTypes =
+/*type ActionTypes =
     ProfileReducerActionTypes
-    | DialogsReducerActionTypes;
+    | DialogsReducerActionTypes;*/
 
-let store: StoreType = {
+/*let store: StoreType = {
     // private info
     _callSubscriber() {
         console.log('State was changed')
@@ -93,7 +88,7 @@ let store: StoreType = {
     },
 
     // public
-    /*addPost() {
+    /!*addPost() {
         /!*let newPostState = *!/
         this._state2.profilePage.myPostsData.push({id: v1(), message: this._state2.profilePage.newPostText, likes: 0})
         this._callSubscriber();
@@ -103,7 +98,7 @@ let store: StoreType = {
     updateNewPostText(newText) {
         this._state2.profilePage.newPostText = newText
         this._callSubscriber()
-    },*/
+    },*!/
 
     dispatch(action) { // action - { type: ADD-POST }
 
@@ -113,7 +108,7 @@ let store: StoreType = {
 
         this._callSubscriber(this._state2);
 
-        /*if (action.type === 'ADD-POST') {
+        /!*if (action.type === 'ADD-POST') {
             this._state2.profilePage.myPostsData.push({
                 id: v1(),
                 message: this._state2.profilePage.newPostText,
@@ -135,7 +130,7 @@ let store: StoreType = {
             })
             this._callSubscriber();
             this._state2.dialogsPage.newMessageText = '';
-        }*/
+        }*!/
     }
 
-};
+};*/

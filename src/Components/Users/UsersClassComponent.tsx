@@ -3,13 +3,14 @@ import styles from './Users.module.css';
 import user_image from '../../Assets/Images/user_image.png';
 import {UserType} from '../../Redux/Reducers/UsersReducer';
 import {v1} from 'uuid';
+import {NavLink} from 'react-router-dom';
 
 type UsersComponentPropsType = {
     users: Array<UserType>
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    onPageChanged:(pageNumber: number) => void
+    onPageChanged: (pageNumber: number) => void
     followUser: (userId: string) => void
     unfollowUser: (userId: string) => void
 }
@@ -28,14 +29,16 @@ export const UsersClassComponent = (props: UsersComponentPropsType) => {
         <div>
             <div>
                 {pages.map(el => <span key={v1()}
-                    className={props.currentPage === el ? styles.selectedPage : ''}
-                    onClick={(event) => props.onPageChanged(el)}>{el}</span>)}
+                                       className={props.currentPage === el ? styles.selectedPage : ''}
+                                       onClick={(event) => props.onPageChanged(el)}>{el}</span>)}
             </div>
             {props.users.map(el => <div key={el.id}>
                 <span>
                     <div>
-                        <img src={el.photos.small !== null ? el.photos.small : user_image} alt=""
-                             className={styles.photo}/>
+                        <NavLink to={'/profile/' + el.id}>
+                            <img src={el.photos.small !== null ? el.photos.small : user_image} alt=""
+                                 className={styles.photo}/>
+                        </NavLink>
                     </div>
                     <div>
                         {el.followed

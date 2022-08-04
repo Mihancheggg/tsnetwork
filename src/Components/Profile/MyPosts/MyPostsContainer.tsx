@@ -60,7 +60,8 @@ export const MyPostsContainer = (/!*props: MyPostsContainerDataType*!/) => {
 let mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
     return {
         myPostsData: state.profileReducer.myPostsData,
-        newPostText: state.profileReducer.newPostText
+        newPostText: state.profileReducer.newPostText,
+        profile: state.profileReducer.profile
     }
 }
 
