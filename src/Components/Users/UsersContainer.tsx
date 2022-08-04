@@ -1,20 +1,20 @@
 import React from 'react';
 import {AppPropsType} from '../../Redux/ReduxStore';
 import {connect} from 'react-redux';
-import {compose, Dispatch} from 'redux';
+import {compose} from 'redux';
 import {
     followUserAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
+    toggleFetchingAC,
     unfollowUserAC,
     UsersType,
     UserType
 } from '../../Redux/Reducers/UsersReducer';
 import axios from 'axios';
 import {UsersClassComponent} from './UsersClassComponent';
-import loading_spinner from './../../Assets/Images/loading_spinner.gif'
-import styles from './UsersContainer.module.css'
+import {Preloader} from '../Common/Preloader/Preloader';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
 
@@ -27,22 +27,26 @@ class UsersClassAPI extends React.Component<UsersContainerDataType, UsersType> {
     //super - переброска пропсов прототипу. Если кроме этого конструктор ничего не делает, можно не писать
 
     componentDidMount() {
+        this.props.toggleFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
+        this.props.setCurrentPage(pageNumber);
+        this.props.toggleFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleFetching(false);
             this.props.setUsers(response.data.items)
         })
     }
 
     render() {
         return (
-            <>{this.props.isFetching && <img className={styles.loadingSpinner} src={loading_spinner}/> }
+            <>{this.props.isFetching && <Preloader/>}
                 <UsersClassComponent
                     followUser={this.props.followUser}
                     unfollowUser={this.props.unfollowUser}
@@ -62,6 +66,7 @@ type MapDispatchPropsType = {
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (usersCount: number) => void
+    toggleFetching: (isFetching: boolean) => void
 }
 
 let mapStateToProps = (state: AppPropsType): UsersType => {
@@ -74,7 +79,7 @@ let mapStateToProps = (state: AppPropsType): UsersType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+/*let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         followUser: (userID: string) => {
             dispatch(followUserAC(userID))
@@ -90,9 +95,21 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         },
         setTotalUsersCount: (usersCount: number) => {
             dispatch(setTotalUsersCountAC(usersCount))
-        }
+        },
+        toggleFetching: (isFetching: boolean) => {
+            dispatch(toggleFetchingAC(isFetching))
+        },
     }
-}
+}*/
 
 
-export const UsersContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(UsersClassAPI)
+export const UsersContainer = compose<React.FC>(connect(mapStateToProps, {
+        followUser: followUserAC,
+        unfollowUser: unfollowUserAC,
+        setUsers: setUsersAC,
+        setCurrentPage: setCurrentPageAC,
+        setTotalUsersCount: setTotalUsersCountAC,
+        toggleFetching: toggleFetchingAC
+    }
+))
+(UsersClassAPI)
