@@ -4,20 +4,20 @@ import {ProfilePagePropsType} from '../../App';
 export type ProfileFromServerPropsType ={
     aboutMe?: string
     contacts: {
-        facebook?: string,
-        website?: string,
-        vk?: string,
-        twitter?: string,
-        instagram?: string,
-        youtube?: string,
-        github?: string,
-        mainLink?: string
+        facebook: string,
+        website: string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string,
+        github: string,
+        mainLink: string
     },
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
     userId: number,
-    photos?: {
+    photos: {
         small?: string,
         large?: string
     }

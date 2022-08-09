@@ -15,7 +15,7 @@ type UsersComponentPropsType = {
     unfollowUser: (userId: string) => void
 }
 
-export const UsersClassComponent = (props: UsersComponentPropsType) => {
+export const UsersPresentationalComponent = (props: UsersComponentPropsType) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 

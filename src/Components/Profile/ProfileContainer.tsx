@@ -1,28 +1,38 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {Profile} from './Profile';
 import axios from 'axios';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {ProfileFromServerPropsType, setUserProfile} from '../../Redux/Reducers/ProfileReducer';
 import {AppPropsType} from '../../Redux/ReduxStore';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+
+type PathParamType = {
+    userID: string
+}
 
 export type MapStateToPropsType = {
     profile: ProfileFromServerPropsType | null
 }
 
-type MapDispatchToPropsTYpe = {
-    setUserProfile: (data: ProfileFromServerPropsType) => void
+type MapDispatchToPropsType = {
+    setUserProfile: (profile: ProfileFromServerPropsType) => void
 }
 
-export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsTYpe
+type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+export type ProfileContainerPropsType = OwnPropsType & RouteComponentProps<PathParamType>
 
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType, {}> {
+class ProfileClassContainer extends React.Component<ProfileContainerPropsType, {}> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userID = this.props.match.params.userID
+        if (!userID) {
+            userID = '2'
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
             .then(response => {
-                console.log(response.data)
                 this.props.setUserProfile(response.data)
             })
     }
@@ -40,4 +50,9 @@ let mapStateToProps = (state: AppPropsType): MapStateToPropsType => {
     }
 }
 
-export const ProfileContainerAPI = compose<React.FC>(connect(mapStateToProps, {setUserProfile}))(ProfileContainer)
+//let withUrlDataContainerComponent = withRouter(ProfileClassContainer)
+
+export const ProfileContainerAPI = compose<React.FC>(
+    connect(mapStateToProps, {setUserProfile}),
+    withRouter
+)(ProfileClassContainer)

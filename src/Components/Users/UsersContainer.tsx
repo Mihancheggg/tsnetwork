@@ -13,12 +13,12 @@ import {
     UserType
 } from '../../Redux/Reducers/UsersReducer';
 import axios from 'axios';
-import {UsersClassComponent} from './UsersClassComponent';
+import {UsersPresentationalComponent} from './UsersPresentationalComponent';
 import {Preloader} from '../Common/Preloader/Preloader';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
 
-class UsersClassAPI extends React.Component<UsersContainerDataType, {}> {
+class UsersClassContainer extends React.Component<UsersContainerDataType, {}> {
 
     /*constructor(props: UsersContainerDataType) {
         super(props);
@@ -47,7 +47,7 @@ class UsersClassAPI extends React.Component<UsersContainerDataType, {}> {
     render() {
         return (
             <>{this.props.isFetching && <Preloader/>}
-                <UsersClassComponent
+                <UsersPresentationalComponent
                     followUser={this.props.followUser}
                     unfollowUser={this.props.unfollowUser}
                     users={this.props.users}
@@ -112,4 +112,4 @@ export const UsersContainer = compose<React.FC>(connect(mapStateToProps, {
         toggleFetching: toggleFetchingAC
     }
 ))
-(UsersClassAPI)
+(UsersClassContainer)

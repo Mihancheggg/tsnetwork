@@ -12,7 +12,7 @@ export const Profile = (props: MapStateToPropsType) => {
         {id: v1(), message: 'Very nice!', likes: 10},
         {id: v1(), message: 'It is my first post', likes: 15}
     ]*/
-    console.log(props.profile)
+
     return (
         <div className={styles.profile}>
             <ProfileInfo profile={props.profile}/>

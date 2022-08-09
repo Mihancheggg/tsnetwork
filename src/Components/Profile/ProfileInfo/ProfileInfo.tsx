@@ -9,14 +9,14 @@ export const ProfileInfo = (props: MapStateToPropsType) => {
         return <Preloader/>
     } else {
         return (
-            <div className={styles.profileinfo}>
+            <div className={styles.profileInfo}>
                 <div className={styles.content_image}>
                     <img
-                        src="https://obustroeno.club/wp-content/uploads/2016/08/morskie-kamni-mogut-obladat-razlichnymi-ottenkami-chto-v-znachit-1024x640.jpg"
-                        alt="It must be a lot of stones here"/>
+                        src="https://proprikol.ru/wp-content/uploads/2020/06/krasivye-kartinki-zakaty-27.jpg"
+                        alt="Image from Internet"/>
                 </div>
                 <div className={styles.description}>
-                    <img src={props.profile.photos? props.profile.photos.small : ''} alt="alt"/>
+                    <img src={props.profile.photos? props.profile.photos.small : ''} alt="Profile photo"/>
                     {props.profile.lookingForAJobDescription}
                 </div>
             </div>

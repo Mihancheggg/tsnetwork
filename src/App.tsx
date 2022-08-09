@@ -34,7 +34,6 @@ export type AppPropsType = {
 const App = (/*props: ReduxToAppPropsType*/) => {
 
     return (
-        <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -42,7 +41,7 @@ const App = (/*props: ReduxToAppPropsType*/) => {
                     {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
 
-                    <Route path="/profile" render={() => <ProfileContainerAPI />}/>
+                    <Route path="/profile/:userID?" render={() => <ProfileContainerAPI />}/>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/> {/*dialogsPageData={props.state.dialogsReducer} dispatch={props.dispatch}*/}
                     <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
@@ -51,7 +50,6 @@ const App = (/*props: ReduxToAppPropsType*/) => {
                     <Route path="/friends" render={() => <Friends/>}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 
