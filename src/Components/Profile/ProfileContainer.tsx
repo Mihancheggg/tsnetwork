@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {Profile} from './Profile';
 import axios from 'axios';
 import {compose} from 'redux';

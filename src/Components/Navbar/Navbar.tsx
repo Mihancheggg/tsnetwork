@@ -18,6 +18,7 @@ export const Navbar = () => {
         {link: "/news", name: 'News'},
         {link: "/music", name: 'Music'},
         {link: "/settings", name: 'Settings'},
+        {link: "/friends", name: 'Friends'},
     ]
 
     return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './MyPosts.module.css'
 import {Post, PostType} from './Post/Post';
-import {ProfilePagePropsType} from '../../../App';
 import {MyPostsContainerDataType} from './MyPostsContainer';
 
 

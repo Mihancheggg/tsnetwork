@@ -13,6 +13,7 @@ import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 import {UsersContainer} from './Components/Users/UsersContainer';
 import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
 import {ProfileFromServerPropsType} from './Redux/Reducers/ProfileReducer';
+import {HeaderContainer, HeaderContainerAPI} from './Components/Header/HeaderContainer';
 
 /*export type ReduxToAppPropsType = {
     state: RootStateType,
@@ -35,7 +36,7 @@ const App = (/*props: ReduxToAppPropsType*/) => {
 
     return (
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainerAPI/>
                 <Navbar/>
                 <div className="app-wrapper_content">
                     {/*<Route path="/profile" component={Profile}/>

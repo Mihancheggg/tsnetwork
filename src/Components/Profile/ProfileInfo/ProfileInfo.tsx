@@ -13,10 +13,10 @@ export const ProfileInfo = (props: MapStateToPropsType) => {
                 <div className={styles.content_image}>
                     <img
                         src="https://proprikol.ru/wp-content/uploads/2020/06/krasivye-kartinki-zakaty-27.jpg"
-                        alt="Image from Internet"/>
+                        alt="Random from Internet"/>
                 </div>
                 <div className={styles.description}>
-                    <img src={props.profile.photos? props.profile.photos.small : ''} alt="Profile photo"/>
+                    <img src={props.profile.photos? props.profile.photos.small : ''} alt="Profile ava"/>
                     {props.profile.lookingForAJobDescription}
                 </div>
             </div>
