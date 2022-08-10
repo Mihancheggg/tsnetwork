@@ -13,7 +13,7 @@ import {
     UserType
 } from '../../Redux/Reducers/UsersReducer';
 import axios from 'axios';
-import {UsersPresentationalComponent} from './UsersPresentationalComponent';
+import {Users} from './Users';
 import {Preloader} from '../Common/Preloader/Preloader';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
@@ -28,26 +28,30 @@ class UsersClassContainer extends React.Component<UsersContainerDataType, {}> {
 
     componentDidMount() {
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials: true})
+            .then(response => {
+                this.props.toggleFetching(false)
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleFetching(false);
-            this.props.setUsers(response.data.items)
-        })
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {withCredentials: true})
+            .then(response => {
+                this.props.toggleFetching(false);
+                this.props.setUsers(response.data.items)
+            })
     }
 
     render() {
         return (
             <>{this.props.isFetching && <Preloader/>}
-                <UsersPresentationalComponent
+                <Users
                     followUser={this.props.followUser}
                     unfollowUser={this.props.unfollowUser}
                     users={this.props.users}
