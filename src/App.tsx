@@ -1,9 +1,8 @@
 import React from 'react';
 import './App.css';
-import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
 import {DialogsPropsType} from './Components/Dialogs/Dialogs';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {News} from './Components/News/News';
 import {Music} from './Components/Music/Music';
 import {Settings} from './Components/Settings/Settings';
@@ -13,7 +12,7 @@ import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 import {UsersContainer} from './Components/Users/UsersContainer';
 import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
 import {ProfileFromServerPropsType} from './Redux/Reducers/ProfileReducer';
-import {HeaderContainer, HeaderContainerAPI} from './Components/Header/HeaderContainer';
+import {HeaderContainerAPI} from './Components/Header/HeaderContainer';
 
 /*export type ReduxToAppPropsType = {
     state: RootStateType,
