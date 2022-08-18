@@ -1,5 +1,7 @@
 import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
+import {usersAPI} from '../../API/API';
+import {ThunkDispatchType, ThunkType} from './UsersReducer';
 
 export type ProfileFromServerPropsType ={
     aboutMe?: string
@@ -69,7 +71,15 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
             return {...state, profile: action.profile}
         default:
             return state
-    }
-    ;
+    };
 };
+
+export const setUserProfileThunkCreator = (userID: string): ThunkType => {
+    return (dispatch: ThunkDispatchType) => {
+        usersAPI.getUserProfile(userID)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
+}
 

@@ -1,3 +1,6 @@
+import {ThunkDispatchType, ThunkType} from './UsersReducer';
+import {usersAPI} from '../../API/API';
+
 export type AuthStateType = {
     userID: number | null,
     email: string | null,
@@ -12,7 +15,11 @@ let initialState: AuthStateType = {
     isAuth: false
 }
 
-export const authReducer = (state: AuthStateType = initialState, action: any): AuthStateType => {
+export type AuthReducerActionTypes = setAuthUserDataType
+
+type setAuthUserDataType = ReturnType<typeof setAuthUserData>
+
+export const authReducer = (state: AuthStateType = initialState, action: AuthReducerActionTypes): AuthStateType => {
     switch (action.type) {
         case 'SET-AUTH-USER-DATA':
             return {...state, ...action.payload, isAuth: true}
@@ -28,4 +35,16 @@ export const setAuthUserData = (userID: number, email: string, login: string) =>
             userID, email, login
         }
     } as const
+}
+
+export const getMyProfileThunkCreator = (): ThunkType => {
+    return (dispatch: ThunkDispatchType) => {
+        usersAPI.getMyProfile()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
 }

@@ -1,3 +1,7 @@
+import {usersAPI} from '../../API/API';
+import {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {CommonActionsType, RootStateType} from '../ReduxStore';
+
 export type UsersType = {
     users: Array<UserType>
     pageSize: number
@@ -143,5 +147,46 @@ export const usersReducer = (state: UsersType = initialState, action: UsersReduc
         }
         default:
             return state
+    }
+}
+
+export type ThunkType = ThunkAction<void, RootStateType, unknown, CommonActionsType>
+export type ThunkDispatchType = ThunkDispatch<RootStateType, unknown, CommonActionsType>
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkType => {
+    return (dispatch: ThunkDispatchType) => {
+        dispatch(setCurrentPageAC(currentPage));
+        dispatch(toggleFetchingAC(true));
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleFetchingAC(false))
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalUsersCountAC(data.totalCount))
+        });
+    }
+}
+
+export const followUserThunkCreator = (userID: number): ThunkType => {
+    return (dispatch: ThunkDispatchType) => {
+        dispatch(toggleFollowingProgressAC(true, userID))
+        usersAPI.followUser(userID)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followUserAC(userID))
+                }
+                dispatch(toggleFollowingProgressAC(false, userID))
+            })
+    }
+}
+
+export const unfollowUserThunkCreator = (userID: number): ThunkType => {
+    return (dispatch: ThunkDispatchType) => {
+        dispatch(toggleFollowingProgressAC(true, userID))
+        usersAPI.unfollowUser(userID)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowUserAC(userID))
+                }
+                dispatch(toggleFollowingProgressAC(false, userID))
+            })
     }
 }

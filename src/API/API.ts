@@ -22,7 +22,7 @@ export const usersAPI = {
     },
 
     getUserProfile(userID: string){
-        return instance.get(`/profile/` + userID).then(response => response.data)
+        return instance.get(`/profile/${userID}`).then(response => response.data)
     },
 
     followUser(userID: number){
