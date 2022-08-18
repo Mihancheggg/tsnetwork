@@ -41,4 +41,5 @@ const mapStateToProps = (state: AppPropsType): MapStateToPropsType => {
     }
 }
 
-export const HeaderContainerAPI = compose<React.FC>(connect(mapStateToProps, {getMyProfile: getMyProfileThunkCreator}))(HeaderContainer)
+export const HeaderContainerAPI = compose<React.FC>(connect(mapStateToProps,
+    {getMyProfile: getMyProfileThunkCreator}))(HeaderContainer)

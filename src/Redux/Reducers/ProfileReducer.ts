@@ -74,7 +74,7 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
     };
 };
 
-export const setUserProfileThunkCreator = (userID: string): ThunkType => {
+export const getUserProfileThunkCreator = (userID: string): ThunkType => {
     return (dispatch: ThunkDispatchType) => {
         usersAPI.getUserProfile(userID)
             .then(data => {
