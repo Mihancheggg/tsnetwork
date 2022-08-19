@@ -13,6 +13,7 @@ import {UsersContainer} from './Components/Users/UsersContainer';
 import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
 import {ProfileFromServerPropsType} from './Redux/Reducers/ProfileReducer';
 import {HeaderContainerAPI} from './Components/Header/HeaderContainer';
+import {Login} from './Components/Login/Login';
 
 /*export type ReduxToAppPropsType = {
     state: RootStateType,
@@ -48,6 +49,7 @@ const App = (/*props: ReduxToAppPropsType*/) => {
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
                     <Route path="/friends" render={() => <Friends/>}/>
+                    <Route path="/login" render={() => <Login/>}/>
                 </div>
             </div>
     );

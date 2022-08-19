@@ -3,7 +3,8 @@ import styles from './Users.module.css';
 import user_image from '../../Assets/Images/user_image.png';
 import {UserType} from '../../Redux/Reducers/UsersReducer';
 import {v1} from 'uuid';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
+import {store} from '../../Redux/ReduxStore';
 
 type UsersComponentPropsType = {
     users: Array<UserType>
@@ -25,6 +26,10 @@ export const Users = (props: UsersComponentPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
+    let state = store.getState()
+
+    if(!state.authReducer.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div>

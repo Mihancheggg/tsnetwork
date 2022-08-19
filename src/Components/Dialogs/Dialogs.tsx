@@ -3,6 +3,9 @@ import styles from './Dialogs.module.css';
 import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
 import {DialogsContainerDataType} from './DialogsContainer';
+import state from '../../Redux/state';
+import {Redirect} from 'react-router-dom';
+import {store} from '../../Redux/ReduxStore';
 
 /*export type DialogsPageDataType = {
     //dialogsPageData: DialogsPropsType
@@ -17,6 +20,7 @@ export type DialogsPropsType = {
     dialogsData: Array<DialogItemType>,
     messagesData: Array<MessageItemType>,
     newMessageText: string,
+    //isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsContainerDataType) => {
@@ -29,6 +33,11 @@ export const Dialogs = (props: DialogsContainerDataType) => {
     const addMessage = () => {
         props.addMessage()
     }
+
+    let state = store.getState()
+
+    if(!state.authReducer.isAuth) return <Redirect to={'/login'}/>
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItems}>

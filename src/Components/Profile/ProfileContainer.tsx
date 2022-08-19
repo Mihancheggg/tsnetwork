@@ -3,8 +3,8 @@ import {Profile} from './Profile';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {ProfileFromServerPropsType, getUserProfileThunkCreator} from '../../Redux/Reducers/ProfileReducer';
-import {AppPropsType} from '../../Redux/ReduxStore';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {AppPropsType, store} from '../../Redux/ReduxStore';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 
 type PathParamType = {
     userID: string
@@ -34,6 +34,11 @@ class ProfileClassContainer extends React.Component<ProfileContainerPropsType, {
     }
 
     render() {
+
+        let state = store.getState()
+
+        if(!state.authReducer.isAuth) return <Redirect to={'/login'}/>
+
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         );
