@@ -10,6 +10,7 @@ import {
 } from '../../Redux/Reducers/UsersReducer';
 import {Users} from './Users';
 import {Preloader} from '../Common/Preloader/Preloader';
+import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
 
@@ -101,6 +102,7 @@ let mapStateToProps = (state: AppPropsType): UsersType => {
     }
 }*/
 
+let AuthRedirectComponent = withAuthRedirect(UsersClassContainer)
 
 export const UsersContainer = compose<React.FC>(connect(mapStateToProps, {
         getUsers: getUsersThunkCreator,
@@ -108,4 +110,4 @@ export const UsersContainer = compose<React.FC>(connect(mapStateToProps, {
         unfollowUser: unfollowUserThunkCreator,
     }
 ))
-(UsersClassContainer)
+(AuthRedirectComponent)
