@@ -61,7 +61,8 @@ let mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
     return {
         myPostsData: state.profileReducer.myPostsData,
         newPostText: state.profileReducer.newPostText,
-        profile: state.profileReducer.profile
+        profile: state.profileReducer.profile,
+        status: state.profileReducer.status
     }
 }
 

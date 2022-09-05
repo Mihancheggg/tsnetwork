@@ -1,9 +1,24 @@
 import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
-import {usersAPI} from '../../API/API';
+import {profileAPI, usersAPI} from '../../API/API';
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
 
-export type ProfileFromServerPropsType ={
+
+//state
+let initialState: ProfilePagePropsType = {
+    myPostsData: [
+        {id: v1(), message: 'Hi, how are you?', likes: 22},
+        {id: v1(), message: 'Very nice!', likes: 8},
+        {id: v1(), message: 'It is my second post', likes: 19},
+        {id: v1(), message: 'It is my first post', likes: 15}
+    ],
+    newPostText: '',
+    profile: null,
+    status: ''
+};
+
+//types
+export type ProfileFromServerPropsType = {
     aboutMe?: string
     contacts: {
         facebook: string,
@@ -25,25 +40,19 @@ export type ProfileFromServerPropsType ={
     }
 }
 
-let initialState: ProfilePagePropsType = {
-    myPostsData: [
-        {id: v1(), message: 'Hi, how are you?', likes: 22},
-        {id: v1(), message: 'Very nice!', likes: 8},
-        {id: v1(), message: 'It is my second post', likes: 19},
-        {id: v1(), message: 'It is my first post', likes: 15}
-    ],
-    newPostText: '',
-    profile: null
-};
-
-export type ProfileReducerActionTypes = AddPostActionType | UpdateNewPostTextActionType | setUserProfileType
+export type ProfileReducerActionTypes = AddPostActionType
+    | UpdateNewPostTextActionType
+    | setUserProfileType
+    | setStatusType
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
+export type setStatusType = ReturnType<typeof setStatus>
 
+//actionCreators
 export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
 
 export const updateNewPostTextActionCreator = (text: string) => {
@@ -52,6 +61,40 @@ export const updateNewPostTextActionCreator = (text: string) => {
 
 export const setUserProfile = (profile: ProfileFromServerPropsType) => {
     return {type: 'SET-USER-PROFILE', profile} as const;
+}
+
+export const setStatus = (status: string) => {
+    return {type: 'SET_STATUS', status} as const;
+}
+
+//thunkCreators
+export const getUserProfileThunkCreator = (userID: string): ThunkType => {
+    return (dispatch: ThunkDispatchType) => {
+        profileAPI.getUserProfile(userID)
+            .then(response => {
+                dispatch(setUserProfile(response))
+            })
+    }
+}
+
+export const getStatusThunkCreator = (userID:string): ThunkType=> {
+    return (dispatch: ThunkDispatchType) => {
+        profileAPI.getUserStatus(userID)
+            .then(response => {
+                dispatch(setStatus(response))
+            })
+    }
+}
+
+export const updateStatusThunkCreator = (status:string): ThunkType=> {
+    return (dispatch: ThunkDispatchType) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(setStatus(response.data.data))
+                }
+            })
+    }
 }
 
 export const profileReducer = (state: ProfilePagePropsType = initialState, action: ProfileReducerActionTypes): ProfilePagePropsType => {
@@ -68,18 +111,16 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
         case 'UPDATE-NEW-POST-TEXT':
             return {...state, newPostText: action.newText}
         case 'SET-USER-PROFILE':
+            debugger
             return {...state, profile: action.profile}
+        case 'SET_STATUS': {
+            return {...state, status: action.status}
+        }
         default:
             return state
-    };
+    }
+    ;
 };
 
-export const getUserProfileThunkCreator = (userID: string): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        usersAPI.getUserProfile(userID)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
-    }
-}
+
 

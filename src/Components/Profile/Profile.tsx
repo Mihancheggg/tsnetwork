@@ -4,8 +4,10 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {MapStateToPropsType} from './ProfileContainer';
 
+export type ProfilePropsType = MapStateToPropsType & { updateStatus: (status: string) => void }
 
-export const Profile = (props: MapStateToPropsType) => {
+
+export const Profile = (props: ProfilePropsType) => {
 
     /*let myPostsData: Array<PostType> = [
         {id: v1(), message: 'Hi, how are you?', likes: 22},
@@ -15,7 +17,7 @@ export const Profile = (props: MapStateToPropsType) => {
 
     return (
         <div className={styles.profile}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo status={props.status} profile={props.profile} updateStatus={props.updateStatus}/>
             <MyPostsContainer //profilePage={props.profilePage} dispatch={props.dispatch}
             />
         </div>

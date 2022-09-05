@@ -1,5 +1,5 @@
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
-import {usersAPI} from '../../API/API';
+import {authAPI} from '../../API/API';
 
 export type AuthStateType = {
     userID: number | null,
@@ -39,7 +39,7 @@ export const setAuthUserData = (userID: number, email: string, login: string) =>
 
 export const getMyProfileThunkCreator = (): ThunkType => {
     return (dispatch: ThunkDispatchType) => {
-        usersAPI.getMyProfile()
+        authAPI.getMyProfile()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data

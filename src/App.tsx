@@ -24,6 +24,7 @@ export type ProfilePagePropsType = {
     myPostsData: Array<PostType>,
     newPostText: string
     profile: ProfileFromServerPropsType | null
+    status: string
 }
 
 export type AppPropsType = {
