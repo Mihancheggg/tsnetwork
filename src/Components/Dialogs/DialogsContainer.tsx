@@ -62,8 +62,6 @@ let mapStateToProps = (state: AppPropsType): DialogsPropsType => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
-
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addMessage: () => {
@@ -77,4 +75,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 
 //export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 //export default compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(Dialogs);
-export const DialogsContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(AuthRedirectComponent)
+export const DialogsContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps), withAuthRedirect)(Dialogs)

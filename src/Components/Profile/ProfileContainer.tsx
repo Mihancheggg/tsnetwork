@@ -41,17 +41,16 @@ class ProfileClassContainer extends React.Component<ProfileContainerPropsType, {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileClassContainer)
-
 let mapStateToProps = (state: AppPropsType): MapStateToPropsType => {
     return {
         profile: state.profileReducer.profile
     }
 }
 
+//let AuthRedirectComponent = withAuthRedirect(ProfileClassContainer)
 //let withUrlDataContainerComponent = withRouter(ProfileClassContainer)
 
 export const ProfileContainerAPI = compose<React.FC>(
     connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator}),
-    withRouter
-)(AuthRedirectComponent)
+    withRouter, withAuthRedirect
+)(ProfileClassContainer)

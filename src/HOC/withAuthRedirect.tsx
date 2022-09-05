@@ -13,17 +13,17 @@ const mapStateToPropsForRedirect = (state: AppPropsType): MapStateToPropsForRedi
     }
 }
 
-// export function withAuthRedirect<T>(Component: ComponentType<T>){
-//     const RedirectComponent = (props: MapStateToPropsForRedirectType) => {
-//         let {isAuth, ...restProps} = props
-//         if (!isAuth) return <Redirect to={'/login'}/>
-//         return <Component {...restProps as T}/>
-//     }
-//     let ConnectedRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent)
-//     return ConnectedRedirectComponent
-// }
+export function withAuthRedirect<T>(Component: React.FC<T>){
+    const RedirectComponent = (props: MapStateToPropsForRedirectType) => {
+        let {isAuth, ...restProps} = props
+        if (!isAuth) return <Redirect to={'/login'}/>
+        return <Component {...restProps as T}/>
+    }
+    let ConnectedRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent)
+    return ConnectedRedirectComponent
+}
 
-export function withAuthRedirect(Component: any) {
+/*export function withAuthRedirect(Component: any) {
     class RedirectComponent extends React.Component<any, any> {
         render() {
             let state = store.getState()
@@ -32,5 +32,5 @@ export function withAuthRedirect(Component: any) {
         }
     }
     return connect(mapStateToPropsForRedirect)(RedirectComponent)
-}
+}*/
 
