@@ -43,6 +43,10 @@ export const authAPI = {
         return instance.get(`/auth/me`)
             .then(response => response.data)
     },
+    login(FormData:any){
+        return instance.post(`/auth/login`, {FormData})
+            .then(response => response.data)
+    }
 }
 
 export type ResponseType<D = {}> = {
