@@ -77,7 +77,7 @@ export const getUserProfileThunkCreator = (userID: string): ThunkType => {
     }
 }
 
-export const getStatusThunkCreator = (userID:string): ThunkType=> {
+export const getStatusThunkCreator = (userID: string): ThunkType => {
     return (dispatch: ThunkDispatchType) => {
         profileAPI.getUserStatus(userID)
             .then(response => {
@@ -86,12 +86,12 @@ export const getStatusThunkCreator = (userID:string): ThunkType=> {
     }
 }
 
-export const updateStatusThunkCreator = (status:string): ThunkType=> {
+export const updateStatusThunkCreator = (status: string): ThunkType => {
     return (dispatch: ThunkDispatchType) => {
         profileAPI.updateStatus(status)
             .then(response => {
-                if(response.data.resultCode === 0){
-                    dispatch(setStatus(response.data.data))
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
                 }
             })
     }
@@ -111,7 +111,6 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
         case 'UPDATE-NEW-POST-TEXT':
             return {...state, newPostText: action.newText}
         case 'SET-USER-PROFILE':
-            debugger
             return {...state, profile: action.profile}
         case 'SET_STATUS': {
             return {...state, status: action.status}

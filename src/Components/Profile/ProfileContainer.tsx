@@ -23,7 +23,7 @@ export type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     getUserProfile: (userID: string) => void
     getUserStatus: (userID: string) => void
-    updateStatus: (status: string)=> void
+    updateStatus: (status: string) => void
 }
 
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -35,15 +35,19 @@ class ProfileClassContainer extends React.Component<ProfileContainerPropsType, {
     componentDidMount() {
         let userID = this.props.match.params.userID
         if (!userID) {
-            userID = '2'
+            userID = '24949'
         }
         this.props.getUserProfile(userID)
+        //setTimeout(()=>{
         this.props.getUserStatus(userID)
+        // },500)
+
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         );
     }
 }
@@ -59,6 +63,10 @@ let mapStateToProps = (state: AppPropsType): MapStateToPropsType => {
 //let withUrlDataContainerComponent = withRouter(ProfileClassContainer)
 
 export const ProfileContainerAPI = compose<React.FC>(
-    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getStatusThunkCreator, updateStatus: updateStatusThunkCreator}),
+    connect(mapStateToProps, {
+        getUserProfile: getUserProfileThunkCreator,
+        getUserStatus: getStatusThunkCreator,
+        updateStatus: updateStatusThunkCreator
+    }),
     withRouter, withAuthRedirect
 )(ProfileClassContainer)
