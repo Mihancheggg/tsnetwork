@@ -22,7 +22,6 @@ import {Login} from './Components/Login/Login';
 
 export type ProfilePagePropsType = {
     myPostsData: Array<PostType>,
-    newPostText: string
     profile: ProfileFromServerPropsType | null
     status: string
 }

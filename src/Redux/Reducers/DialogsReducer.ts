@@ -25,40 +25,26 @@ let initialState: DialogsPropsType = {
             message: 'Very good',
             img: 'https://i.pinimg.com/736x/3c/92/34/3c9234554d0f72bc4b131ae7ee830d20--bunny-bunny-bunny-rabbits.jpg'
         },
-    ],
-    newMessageText: '',
+    ]
 };
 
-export type DialogsReducerActionTypes = UpdateNewMessageTextActionType | addMessageActionCreatorActionType
-
-type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextActionCreator>
+export type DialogsReducerActionTypes = addMessageActionCreatorActionType
 
 type addMessageActionCreatorActionType = ReturnType<typeof addMessageActionCreator>
 
-
-export const updateNewMessageTextActionCreator = (text: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newText: text
-    } as const;
-}
-
-export const addMessageActionCreator = () => ({type: 'ADD-MESSAGE'} as const)
-
+export const addMessageActionCreator = (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
 
 export const dialogsReducer = (state: DialogsPropsType = initialState, action: DialogsReducerActionTypes): DialogsPropsType => {
 
     switch (action.type) {
-
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            return {...state, newMessageText: action.newText};
         case 'ADD-MESSAGE':
             return {
                 ...state, messagesData: [...state.messagesData, {
                     id: v1(),
-                    message: state.newMessageText,
+                    /*message: state.newMessageText,*/
+                    message: action.newMessage,
                     img: 'https://i.pinimg.com/736x/3c/92/34/3c9234554d0f72bc4b131ae7ee830d20--bunny-bunny-bunny-rabbits.jpg'
-                }], newMessageText: ''
+                }], /*newMessageText: ''*/
             };
         default:
             return state;

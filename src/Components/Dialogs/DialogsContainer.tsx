@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../Redux/Reducers/DialogsReducer';
+import {addMessageActionCreator} from '../../Redux/Reducers/DialogsReducer';
 import {Dialogs, DialogsPropsType} from './Dialogs';
 //import {StoreContext} from '../../StoreContext';
 import {AppPropsType} from '../../Redux/ReduxStore';
@@ -49,27 +49,26 @@ export type DialogsContainerDataType = DialogsPropsType & MapDispatchPropsType
 };*/
 
 type MapDispatchPropsType = {
-    addMessage: () => void
-    updateTextAreaValue: (text: string) => void
+    // addMessage: () => void
+    addMessage: (newMessage: string) => void
 }
 
 let mapStateToProps = (state: AppPropsType): DialogsPropsType => {
     return {
         dialogsData: state.dialogsReducer.dialogsData,
         messagesData: state.dialogsReducer.messagesData,
-        newMessageText: state.dialogsReducer.newMessageText,
         //isAuth: state.authReducer.isAuth
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        addMessage: () => {
+        /*addMessage: () => {
             dispatch(addMessageActionCreator())
-        },
-        updateTextAreaValue: (text: string) => {
-            dispatch(updateNewMessageTextActionCreator(text))
-        },
+        },*/
+        addMessage: (newMessage: string) => {
+            dispatch(addMessageActionCreator(newMessage))
+        }
     }
 }
 

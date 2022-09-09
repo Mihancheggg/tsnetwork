@@ -1,6 +1,6 @@
 import React from 'react';
 import {ProfilePagePropsType} from '../../../App';
-import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../Redux/Reducers/ProfileReducer';
+import {addPostActionCreator} from '../../../Redux/Reducers/ProfileReducer';
 //import {StoreContext} from '../../../StoreContext';
 import {MyPosts} from './MyPosts';
 import {AppPropsType} from '../../../Redux/ReduxStore';
@@ -10,8 +10,7 @@ import {compose, Dispatch} from 'redux';
 export type MyPostsContainerDataType = ProfilePagePropsType & MapDispatchPropsType
 
 type MapDispatchPropsType = {
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    addPost: (newPost: string) => void
 }
 
 /*
@@ -60,7 +59,6 @@ export const MyPostsContainer = (/!*props: MyPostsContainerDataType*!/) => {
 let mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
     return {
         myPostsData: state.profileReducer.myPostsData,
-        newPostText: state.profileReducer.newPostText,
         profile: state.profileReducer.profile,
         status: state.profileReducer.status
     }
@@ -68,11 +66,8 @@ let mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreator())
-        },
-        updateNewPostText: (text: string) => {
-            dispatch(updateNewPostTextActionCreator(text))
+        addPost: (newPost: string) => {
+            dispatch(addPostActionCreator(newPost))
         }
     }
 }

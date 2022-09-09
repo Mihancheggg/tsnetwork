@@ -6,6 +6,7 @@ import {DialogsContainerDataType} from './DialogsContainer';
 import state from '../../Redux/state';
 import {Redirect} from 'react-router-dom';
 import {store} from '../../Redux/ReduxStore';
+import {FormDataType, NewMessageReduxForm} from './NewMessageForm/NewMessageForm';
 
 /*export type DialogsPageDataType = {
     //dialogsPageData: DialogsPropsType
@@ -19,24 +20,26 @@ import {store} from '../../Redux/ReduxStore';
 export type DialogsPropsType = {
     dialogsData: Array<DialogItemType>,
     messagesData: Array<MessageItemType>,
-    newMessageText: string,
-    //isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsContainerDataType) => {
 
-    const onTextAreaChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = (e.currentTarget.value)
-        props.updateTextAreaValue(text)
-    }
+    /* const onTextAreaChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+         let text = (e.currentTarget.value)
+         props.updateTextAreaValue(text)
+     }*/
 
-    const addMessage = () => {
+    /*const addMessage = () => {
         props.addMessage()
+    }*/
+
+    const addNewMessage = (values: FormDataType) => {
+        props.addMessage(values.newMessage)
     }
 
     let state = store.getState()
 
-    if(!state.authReducer.isAuth) return <Redirect to={'/login'}/>
+    if (!state.authReducer.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={styles.dialogs}>
@@ -57,11 +60,12 @@ export const Dialogs = (props: DialogsContainerDataType) => {
                 </div>
 
                 <div>
-                    <textarea value={props.newMessageText}
+                    {/*<textarea value={props.newMessageText}
                               onChange={onTextAreaChangeHandler}/>
                     <div>
                         <button onClick={addMessage}>Add message</button>
-                    </div>
+                    </div>*/}
+                    <NewMessageReduxForm onSubmit={addNewMessage}/>
                 </div>
             </div>
         </div>

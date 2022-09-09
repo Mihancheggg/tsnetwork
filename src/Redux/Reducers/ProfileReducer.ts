@@ -12,7 +12,6 @@ let initialState: ProfilePagePropsType = {
         {id: v1(), message: 'It is my second post', likes: 19},
         {id: v1(), message: 'It is my first post', likes: 15}
     ],
-    newPostText: '',
     profile: null,
     status: ''
 };
@@ -41,23 +40,16 @@ export type ProfileFromServerPropsType = {
 }
 
 export type ProfileReducerActionTypes = AddPostActionType
-    | UpdateNewPostTextActionType
     | setUserProfileType
     | setStatusType
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 
 //actionCreators
-export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
-
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: text} as const;
-}
+export const addPostActionCreator = (newPost: string) => ({type: 'ADD-POST', newPost} as const)
 
 export const setUserProfile = (profile: ProfileFromServerPropsType) => {
     return {type: 'SET-USER-PROFILE', profile} as const;
@@ -104,12 +96,10 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
                 ...state, myPostsData: [...state.myPostsData,
                     {
                         id: v1(),
-                        message: state.newPostText,
+                        message: action.newPost,
                         likes: 0
-                    }], newPostText: ''
+                    }]
             }
-        case 'UPDATE-NEW-POST-TEXT':
-            return {...state, newPostText: action.newText}
         case 'SET-USER-PROFILE':
             return {...state, profile: action.profile}
         case 'SET_STATUS': {
