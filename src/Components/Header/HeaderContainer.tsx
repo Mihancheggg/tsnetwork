@@ -2,11 +2,12 @@ import React from 'react';
 import {Header} from './Header';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {getMyProfileThunkCreator} from '../../Redux/Reducers/AuthReducer';
+import {getMyProfileThunkCreator, logoutThunkCreator} from '../../Redux/Reducers/AuthReducer';
 import {AppPropsType} from '../../Redux/ReduxStore';
 
 type MapDispatchToPropsType = {
     getMyProfile: () => void
+    logout: () => void
 }
 
 type MapStateToPropsType = {
@@ -14,7 +15,7 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 
-type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export class HeaderContainer extends React.Component<OwnPropsType, {}> {
 
@@ -42,4 +43,4 @@ const mapStateToProps = (state: AppPropsType): MapStateToPropsType => {
 }
 
 export const HeaderContainerAPI = compose<React.FC>(connect(mapStateToProps,
-    {getMyProfile: getMyProfileThunkCreator}))(HeaderContainer)
+    {getMyProfile: getMyProfileThunkCreator, logout: logoutThunkCreator}))(HeaderContainer)

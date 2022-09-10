@@ -1,5 +1,4 @@
-import axios,{AxiosResponse} from 'axios';
-import {ProfileFromServerPropsType} from '../Redux/Reducers/ProfileReducer';
+import axios from 'axios';
 
 //const baseUrl: string = `https://social-network.samuraijs.com/api/1.0`
 
@@ -33,7 +32,7 @@ export const profileAPI = {
     getUserStatus(userID: string) {
         return instance.get(`/profile/status/${userID}`).then(response => response.data)
     },
-    updateStatus(status: string){
+    updateStatus(status: string) {
         return instance.put((`/profile/status/`), {status: status})
     }
 }
@@ -43,8 +42,12 @@ export const authAPI = {
         return instance.get(`/auth/me`)
             .then(response => response.data)
     },
-    login(FormData:any){
-        return instance.post(`/auth/login`, {FormData})
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`/auth/login`, {email, password, rememberMe})
+            .then(response => response.data)
+    },
+    logout() {
+        return instance.delete(`/auth/login`)
             .then(response => response.data)
     }
 }

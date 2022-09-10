@@ -13,7 +13,7 @@ import {UsersContainer} from './Components/Users/UsersContainer';
 import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
 import {ProfileFromServerPropsType} from './Redux/Reducers/ProfileReducer';
 import {HeaderContainerAPI} from './Components/Header/HeaderContainer';
-import {Login} from './Components/Login/Login';
+import {LoginContainer} from './Components/Login/Login';
 
 /*export type ReduxToAppPropsType = {
     state: RootStateType,
@@ -35,23 +35,24 @@ export type AppPropsType = {
 const App = (/*props: ReduxToAppPropsType*/) => {
 
     return (
-            <div className="app-wrapper">
-                <HeaderContainerAPI/>
-                <Navbar/>
-                <div className="app-wrapper_content">
-                    {/*<Route path="/profile" component={Profile}/>
+        <div className="app-wrapper">
+            <HeaderContainerAPI/>
+            <Navbar/>
+            <div className="app-wrapper_content">
+                {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
 
-                    <Route path="/profile/:userID?" render={() => <ProfileContainerAPI />}/>
-                    <Route path="/dialogs" render={() => <DialogsContainer/>}/> {/*dialogsPageData={props.state.dialogsReducer} dispatch={props.dispatch}*/}
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/friends" render={() => <Friends/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
-                </div>
+                <Route path="/profile/:userID?" render={() => <ProfileContainerAPI/>}/>
+                <Route path="/dialogs" render={() =>
+                    <DialogsContainer/>}/> {/*dialogsPageData={props.state.dialogsReducer} dispatch={props.dispatch}*/}
+                <Route path="/users" render={() => <UsersContainer/>}/>
+                <Route path="/news" render={() => <News/>}/>
+                <Route path="/music" render={() => <Music/>}/>
+                <Route path="/settings" render={() => <Settings/>}/>
+                <Route path="/friends" render={() => <Friends/>}/>
+                <Route path="/login" render={() => <LoginContainer/>}/>
             </div>
+        </div>
     );
 }
 
