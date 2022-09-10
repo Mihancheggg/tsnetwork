@@ -1,5 +1,6 @@
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
 import {authAPI} from '../../API/API';
+import {stopSubmit} from 'redux-form';
 
 export type AuthStateType = {
     userID: number | null,
@@ -59,6 +60,9 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(getMyProfileThunkCreator())
+                } else {
+                    let action = stopSubmit('Login',{email: 'Wrong email', password: 'Wrong password'})
+                    dispatch(action)
                 }
             })
     }
