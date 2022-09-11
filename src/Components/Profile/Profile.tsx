@@ -17,7 +17,7 @@ export const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={styles.profile}>
-            <ProfileInfo status={props.status} profile={props.profile} updateStatus={props.updateStatus}/>
+            <ProfileInfo authed={props.authed} status={props.status} profile={props.profile} updateStatus={props.updateStatus}/>
             <MyPostsContainer //profilePage={props.profilePage} dispatch={props.dispatch}
             />
         </div>

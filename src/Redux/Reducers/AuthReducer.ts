@@ -61,8 +61,8 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
                 if (data.resultCode === 0) {
                     dispatch(getMyProfileThunkCreator())
                 } else {
-                    let action = stopSubmit('Login',{email: 'Wrong email', password: 'Wrong password'})
-                    dispatch(action)
+                    let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
+                    dispatch(stopSubmit('Login',{_error: message}))
                 }
             })
     }
