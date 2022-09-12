@@ -6,7 +6,6 @@ import {getMyProfileThunkCreator, logoutThunkCreator} from '../../Redux/Reducers
 import {AppPropsType} from '../../Redux/ReduxStore';
 
 type MapDispatchToPropsType = {
-    getMyProfile: () => void
     logout: () => void
 }
 
@@ -19,16 +18,16 @@ export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export class HeaderContainer extends React.Component<OwnPropsType, {}> {
 
-    componentDidMount() {
+   /* componentDidMount() {
         this.props.getMyProfile()
-        /*usersAPI.getMyProfile()
+        /!*usersAPI.getMyProfile()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data
                     this.props.setAuthUserData(id, email, login)
                 }
-            })*/
-    }
+            })*!/
+    }*/
 
     render() {
         return <Header {...this.props}/>;
@@ -43,4 +42,4 @@ const mapStateToProps = (state: AppPropsType): MapStateToPropsType => {
 }
 
 export const HeaderContainerAPI = compose<React.FC>(connect(mapStateToProps,
-    {getMyProfile: getMyProfileThunkCreator, logout: logoutThunkCreator}))(HeaderContainer)
+    {logout: logoutThunkCreator}))(HeaderContainer)

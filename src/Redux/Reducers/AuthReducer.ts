@@ -42,17 +42,16 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
 
 
 //thunk creators
-export const getMyProfileThunkCreator = (): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        authAPI.getMyProfile()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data
-                    dispatch(setAuthUserData(id, email, login,true))
-                }
-            })
-    }
+export const getMyProfileThunkCreator = (): ThunkType => (dispatch: ThunkDispatchType) => {
+    return  authAPI.getMyProfile()
+        .then(data => {
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data
+                dispatch(setAuthUserData(id, email, login, true))
+            }
+        })
 }
+
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): ThunkType => {
     return (dispatch: ThunkDispatchType) => {
@@ -62,7 +61,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
                     dispatch(getMyProfileThunkCreator())
                 } else {
                     let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
-                    dispatch(stopSubmit('Login',{_error: message}))
+                    dispatch(stopSubmit('Login', {_error: message}))
                 }
             })
     }
@@ -73,7 +72,7 @@ export const logoutThunkCreator = (): ThunkType => {
         authAPI.logout()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null,false))
+                    dispatch(setAuthUserData(null, null, null, false))
                 }
             })
     }
