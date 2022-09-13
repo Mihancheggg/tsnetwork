@@ -11,6 +11,13 @@ import {
 import {Users} from './Users';
 import {Preloader} from '../Common/Preloader/Preloader';
 import {withAuthRedirect} from '../../HOC/withAuthRedirect';
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from '../../Redux/Selectors/UsersSelectors';
 
 export type UsersContainerDataType = UsersType & MapDispatchPropsType
 
@@ -70,12 +77,12 @@ type MapDispatchPropsType = {
 
 let mapStateToProps = (state: AppPropsType): UsersType => {
     return {
-        users: state.usersReducer.users,
-        pageSize: state.usersReducer.pageSize,
-        totalUsersCount: state.usersReducer.totalUsersCount,
-        currentPage: state.usersReducer.currentPage,
-        isFetching: state.usersReducer.isFetching,
-        followingInProgress: state.usersReducer.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
