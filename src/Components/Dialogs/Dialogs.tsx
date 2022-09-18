@@ -1,9 +1,8 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import styles from './Dialogs.module.css';
 import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
 import {DialogsContainerDataType} from './DialogsContainer';
-import state from '../../Redux/state';
 import {Redirect} from 'react-router-dom';
 import {store} from '../../Redux/ReduxStore';
 import {FormDataType, NewMessageReduxForm} from './NewMessageForm/NewMessageForm';
@@ -35,6 +34,7 @@ export const Dialogs = (props: DialogsContainerDataType) => {
 
     const addNewMessage = (values: FormDataType) => {
         props.addMessage(values.newMessage)
+        values.newMessage = ''
     }
 
     let state = store.getState()

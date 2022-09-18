@@ -3,6 +3,7 @@ import styles from './Profile.module.css';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {MapStateToPropsType} from './ProfileContainer';
+import {MyPosts} from './MyPosts/MyPosts';
 
 export type ProfilePropsType = MapStateToPropsType & { updateStatus: (status: string) => void }
 
@@ -18,8 +19,9 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div className={styles.profile}>
             <ProfileInfo authed={props.authed} status={props.status} profile={props.profile} updateStatus={props.updateStatus}/>
-            <MyPostsContainer //profilePage={props.profilePage} dispatch={props.dispatch}
-            />
+            {/*<MyPostsContainer //profilePage={props.profilePage} dispatch={props.dispatch}
+            />*/}
+            <MyPosts/>
         </div>
     )
 };
