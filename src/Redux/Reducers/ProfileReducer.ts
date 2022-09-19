@@ -42,14 +42,17 @@ export type ProfileFromServerPropsType = {
 export type ProfileReducerActionTypes = AddPostActionType
     | setUserProfileType
     | setStatusType
+    | DeletePostActionType
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type DeletePostActionType = ReturnType<typeof deletePostActionCreator>
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 
 //actionCreators
 export const addPostActionCreator = (newPost: string) => ({type: 'ADD-POST', newPost} as const)
+export const deletePostActionCreator = (postId: string) => ({type: 'DELETE-POST', postId} as const)
 
 export const setUserProfile = (profile: ProfileFromServerPropsType) => {
     return {type: 'SET-USER-PROFILE', profile} as const;
@@ -100,6 +103,8 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
                         likes: 0
                     }]
             }
+        case 'DELETE-POST':
+            return {...state, myPostsData: state.myPostsData.filter(el=> el.id !== action.postId)}
         case 'SET-USER-PROFILE':
             return {...state, profile: action.profile}
         case 'SET_STATUS': {
