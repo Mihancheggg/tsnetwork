@@ -42,38 +42,30 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
 
 
 //thunk creators
-export const getMyProfileThunkCreator = (): ThunkType => (dispatch: ThunkDispatchType) => {
-    return  authAPI.getMyProfile()
-        .then(data => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-        })
-}
-
-
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        authAPI.login(email, password, rememberMe)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(getMyProfileThunkCreator())
-                } else {
-                    let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
-                    dispatch(stopSubmit('Login', {_error: message}))
-                }
-            })
+export const getMyProfileThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let data = await authAPI.getMyProfile()
+    if (data.resultCode === 0) {
+        let {id, email, login} = data.data
+        dispatch(setAuthUserData(id, email, login, true))
     }
 }
 
-export const logoutThunkCreator = (): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        authAPI.logout()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null, false))
-                }
-            })
+
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let data = await authAPI.login(email, password, rememberMe)
+    if (data.resultCode === 0) {
+        dispatch(getMyProfileThunkCreator())
+    } else {
+        let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
+        dispatch(stopSubmit('Login', {_error: message}))
     }
+}
+
+
+export const logoutThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let data = await authAPI.logout()
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
+
 }

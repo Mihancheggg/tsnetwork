@@ -1,6 +1,7 @@
 import {usersAPI} from '../../API/API';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {CommonActionsType, RootStateType} from '../ReduxStore';
+import {updateObjectInArray} from '../../Utils/object-helpers';
 
 export type UsersType = {
     users: Array<UserType>
@@ -115,17 +116,19 @@ export const toggleFollowingProgressAC = (isFetching: boolean, userID: number) =
 export const usersReducer = (state: UsersType = initialState, action: UsersReducerActionTypes): UsersType => {
     switch (action.type) {
         case 'FOLLOW-USER': {
-            let newState = {
+            /*let newState = {
                 ...state,
                 users: state.users.map(el => el.id === action.userId ? ({...el, followed: true}) : el)
-            }
+            }*/
+            let newState = {...state, users: updateObjectInArray(state.users, action.userId, {followed: true})}
             return newState
         }
         case 'UNFOLLOW-USER': {
-            let newState = {
+            /*let newState = {
                 ...state,
                 users: state.users.map(el => el.id === action.userId ? ({...el, followed: false}) : el)
-            }
+            }*/
+            let newState = {...state, users: updateObjectInArray(state.users, action.userId, {followed: false})}
             return newState
         }
         case 'SET-USERS': {
@@ -153,40 +156,33 @@ export const usersReducer = (state: UsersType = initialState, action: UsersReduc
 export type ThunkType = ThunkAction<void, RootStateType, unknown, CommonActionsType>
 export type ThunkDispatchType = ThunkDispatch<RootStateType, unknown, CommonActionsType>
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        dispatch(setCurrentPageAC(currentPage));
-        dispatch(toggleFetchingAC(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(toggleFetchingAC(false))
-            dispatch(setUsersAC(data.items))
-            dispatch(setTotalUsersCountAC(data.totalCount))
-        });
-    }
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkType => async (dispatch: ThunkDispatchType) => {
+    dispatch(setCurrentPageAC(currentPage));
+    dispatch(toggleFetchingAC(true));
+    let data = await usersAPI.getUsers(currentPage, pageSize)
+    dispatch(toggleFetchingAC(false))
+    dispatch(setUsersAC(data.items))
+    dispatch(setTotalUsersCountAC(data.totalCount))
+
 }
 
-export const followUserThunkCreator = (userID: number): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        dispatch(toggleFollowingProgressAC(true, userID))
-        usersAPI.followUser(userID)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(followUserAC(userID))
-                }
-                dispatch(toggleFollowingProgressAC(false, userID))
-            })
+export const followUnfollowFlow = async (userID: number, dispatch: ThunkDispatchType, apiMethod: { (userID: number): Promise<any>}, action: {(userId: number): CommonActionsType}) => {
+    dispatch(toggleFollowingProgressAC(true, userID))
+    let data = await apiMethod(userID)
+    if (data.resultCode === 0) {
+        dispatch(action(userID))
     }
+    dispatch(toggleFollowingProgressAC(false, userID))
 }
 
-export const unfollowUserThunkCreator = (userID: number): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        dispatch(toggleFollowingProgressAC(true, userID))
-        usersAPI.unfollowUser(userID)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(unfollowUserAC(userID))
-                }
-                dispatch(toggleFollowingProgressAC(false, userID))
-            })
-    }
+export const followUserThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
+    const apiMethod = usersAPI.followUser.bind(usersAPI)
+    const action = followUserAC
+    followUnfollowFlow(userID,dispatch,apiMethod,action)
+}
+
+export const unfollowUserThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
+    const apiMethod = usersAPI.unfollowUser.bind(usersAPI)
+    const action = unfollowUserAC
+    followUnfollowFlow(userID,dispatch,apiMethod,action)
 }

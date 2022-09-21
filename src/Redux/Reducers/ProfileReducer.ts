@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
-import {profileAPI, usersAPI} from '../../API/API';
+import {profileAPI} from '../../API/API';
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
 
 
@@ -63,32 +63,21 @@ export const setStatus = (status: string) => {
 }
 
 //thunkCreators
-export const getUserProfileThunkCreator = (userID: string): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        profileAPI.getUserProfile(userID)
-            .then(response => {
-                dispatch(setUserProfile(response))
-            })
-    }
+export const getUserProfileThunkCreator = (userID: string): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let response = await profileAPI.getUserProfile(userID)
+    dispatch(setUserProfile(response))
 }
 
-export const getStatusThunkCreator = (userID: string): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        profileAPI.getUserStatus(userID)
-            .then(response => {
-                dispatch(setStatus(response))
-            })
-    }
+
+export const getStatusThunkCreator = (userID: string): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let response = await profileAPI.getUserStatus(userID)
+    dispatch(setStatus(response))
 }
 
-export const updateStatusThunkCreator = (status: string): ThunkType => {
-    return (dispatch: ThunkDispatchType) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
+export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
     }
 }
 
@@ -104,7 +93,7 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
                     }]
             }
         case 'DELETE-POST':
-            return {...state, myPostsData: state.myPostsData.filter(el=> el.id !== action.postId)}
+            return {...state, myPostsData: state.myPostsData.filter(el => el.id !== action.postId)}
         case 'SET-USER-PROFILE':
             return {...state, profile: action.profile}
         case 'SET_STATUS': {

@@ -49,10 +49,10 @@ export const Users = (props: UsersComponentPropsType) => {
                     <div>
                         {el.followed
                             ? <button disabled={props.followingInProgress.some(item => item === el.id)} onClick={() => {
-                                props.followUser(el.id)
+                                props.unfollowUser(el.id)
                             }}>Unfollow</button>
                             : <button disabled={props.followingInProgress.some(item => item === el.id)} onClick={() => {
-                                props.unfollowUser(el.id)
+                                props.followUser(el.id)
                             }}>Follow</button>}
                             </div>
                             </span>
