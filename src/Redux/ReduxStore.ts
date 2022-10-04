@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {profileReducer, ProfileReducerActionTypes} from './Reducers/ProfileReducer';
 import {dialogsReducer, DialogsReducerActionTypes} from './Reducers/DialogsReducer';
 import {sidebarReducer, SidebarReducerActionsType} from './Reducers/SidebarReducer';
@@ -18,8 +18,12 @@ let rootReducer = combineReducers({
     form: formReducer
 })
 
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)
+));
 
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+/*export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));*/
 export type RootStateType = ReturnType<typeof store.getState>
 export type ReduxStoreType = typeof store;
 export type AppPropsType = ReturnType<typeof rootReducer>
@@ -30,4 +34,4 @@ export type CommonActionsType = RootStateType
     | SidebarReducerActionsType
 
 // @ts-ignore
-window.store = store
+window.__store__ = store
