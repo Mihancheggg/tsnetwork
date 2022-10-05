@@ -14,7 +14,7 @@ ReactDOM.render(
             /!*dispatch={store.dispatch.bind(store)}
             state={state}*!//>
     </StoreContext.Provider>*/
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <App/>
         </Provider>
