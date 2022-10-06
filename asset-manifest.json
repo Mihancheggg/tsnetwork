@@ -1,23 +1,39 @@
 {
   "files": {
-    "main.css": "/tsnetwork/static/css/main.4cec5eca.css",
-    "main.js": "/tsnetwork/static/js/main.799769e9.js",
-    "static/css/156.d330fda2.chunk.css": "/tsnetwork/static/css/156.d330fda2.chunk.css",
-    "static/js/156.f35e7bbd.chunk.js": "/tsnetwork/static/js/156.f35e7bbd.chunk.js",
-    "static/css/552.1ac3a1af.chunk.css": "/tsnetwork/static/css/552.1ac3a1af.chunk.css",
-    "static/js/552.6cb2c7c1.chunk.js": "/tsnetwork/static/js/552.6cb2c7c1.chunk.js",
+    "main.css": "/tsnetwork/static/css/main.4f2eb6d8.css",
+    "main.js": "/tsnetwork/static/js/main.3a72c30c.js",
+    "static/css/156.5ce13777.chunk.css": "/tsnetwork/static/css/156.5ce13777.chunk.css",
+    "static/js/156.1e2c6077.chunk.js": "/tsnetwork/static/js/156.1e2c6077.chunk.js",
+    "static/css/552.62cae691.chunk.css": "/tsnetwork/static/css/552.62cae691.chunk.css",
+    "static/js/552.10057043.chunk.js": "/tsnetwork/static/js/552.10057043.chunk.js",
+    "static/css/145.2b08ddab.chunk.css": "/tsnetwork/static/css/145.2b08ddab.chunk.css",
+    "static/js/145.c6d9ccf8.chunk.js": "/tsnetwork/static/js/145.c6d9ccf8.chunk.js",
+    "static/js/131.da8db960.chunk.js": "/tsnetwork/static/js/131.da8db960.chunk.js",
+    "static/js/647.1ff25b73.chunk.js": "/tsnetwork/static/js/647.1ff25b73.chunk.js",
+    "static/js/869.7abc0c8c.chunk.js": "/tsnetwork/static/js/869.7abc0c8c.chunk.js",
+    "static/css/934.4bdd8f8b.chunk.css": "/tsnetwork/static/css/934.4bdd8f8b.chunk.css",
+    "static/js/934.70d36d17.chunk.js": "/tsnetwork/static/js/934.70d36d17.chunk.js",
+    "static/js/615.73f1c707.chunk.js": "/tsnetwork/static/js/615.73f1c707.chunk.js",
     "static/media/user_image.png": "/tsnetwork/static/media/user_image.da8b6684f648e3f39f08.png",
     "static/media/loading_spinner.gif": "/tsnetwork/static/media/loading_spinner.7d04f8225d78644ede43.gif",
     "index.html": "/tsnetwork/index.html",
-    "main.4cec5eca.css.map": "/tsnetwork/static/css/main.4cec5eca.css.map",
-    "main.799769e9.js.map": "/tsnetwork/static/js/main.799769e9.js.map",
-    "156.d330fda2.chunk.css.map": "/tsnetwork/static/css/156.d330fda2.chunk.css.map",
-    "156.f35e7bbd.chunk.js.map": "/tsnetwork/static/js/156.f35e7bbd.chunk.js.map",
-    "552.1ac3a1af.chunk.css.map": "/tsnetwork/static/css/552.1ac3a1af.chunk.css.map",
-    "552.6cb2c7c1.chunk.js.map": "/tsnetwork/static/js/552.6cb2c7c1.chunk.js.map"
+    "main.4f2eb6d8.css.map": "/tsnetwork/static/css/main.4f2eb6d8.css.map",
+    "main.3a72c30c.js.map": "/tsnetwork/static/js/main.3a72c30c.js.map",
+    "156.5ce13777.chunk.css.map": "/tsnetwork/static/css/156.5ce13777.chunk.css.map",
+    "156.1e2c6077.chunk.js.map": "/tsnetwork/static/js/156.1e2c6077.chunk.js.map",
+    "552.62cae691.chunk.css.map": "/tsnetwork/static/css/552.62cae691.chunk.css.map",
+    "552.10057043.chunk.js.map": "/tsnetwork/static/js/552.10057043.chunk.js.map",
+    "145.2b08ddab.chunk.css.map": "/tsnetwork/static/css/145.2b08ddab.chunk.css.map",
+    "145.c6d9ccf8.chunk.js.map": "/tsnetwork/static/js/145.c6d9ccf8.chunk.js.map",
+    "131.da8db960.chunk.js.map": "/tsnetwork/static/js/131.da8db960.chunk.js.map",
+    "647.1ff25b73.chunk.js.map": "/tsnetwork/static/js/647.1ff25b73.chunk.js.map",
+    "869.7abc0c8c.chunk.js.map": "/tsnetwork/static/js/869.7abc0c8c.chunk.js.map",
+    "934.4bdd8f8b.chunk.css.map": "/tsnetwork/static/css/934.4bdd8f8b.chunk.css.map",
+    "934.70d36d17.chunk.js.map": "/tsnetwork/static/js/934.70d36d17.chunk.js.map",
+    "615.73f1c707.chunk.js.map": "/tsnetwork/static/js/615.73f1c707.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4cec5eca.css",
-    "static/js/main.799769e9.js"
+    "static/css/main.4f2eb6d8.css",
+    "static/js/main.3a72c30c.js"
   ]
 }

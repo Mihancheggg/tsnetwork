@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/869.7abc0c8c.chunk.js","mappings":"kLAEaA,EAAW,WACpB,OACI,qCAEP,C","sources":["Components/Settings/Settings.tsx"],"sourcesContent":["import React from 'react';\r\n\r\nexport const Settings = () => {\r\n    return (\r\n        <div>Settings</div>\r\n    )\r\n};"],"names":["Settings"],"sourceRoot":""}

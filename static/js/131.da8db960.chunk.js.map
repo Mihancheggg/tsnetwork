@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/131.da8db960.chunk.js","mappings":"8KAEaA,EAAO,WAChB,OACI,iCAEP,C","sources":["Components/News/News.tsx"],"sourcesContent":["import React from 'react';\r\n\r\nexport const News = () => {\r\n    return (\r\n        <div>News</div>\r\n    )\r\n}"],"names":["News"],"sourceRoot":""}
