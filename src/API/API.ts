@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 //const baseUrl: string = `https://social-network.samuraijs.com/api/1.0`
 
@@ -34,6 +34,11 @@ export const profileAPI = {
     },
     updateStatus(status: string) {
         return instance.put((`/profile/status/`), {status: status})
+    },
+    setPhoto(photo: File) {
+        let formData = new FormData()
+        formData.append('image', photo)
+        return instance.put<File,AxiosResponse<ResponseType<SetPhotoResponseType>>>((`/profile/photo/`), formData,{headers:{'Content-Type': 'multipart/form-data'}})
     }
 }
 
@@ -57,4 +62,11 @@ export type ResponseType<D = {}> = {
     messages: Array<string>
     fieldsErrors: Array<string>
     data: D
+}
+
+type SetPhotoResponseType = {
+    photos: {
+        small: string
+        large: string
+    }
 }
