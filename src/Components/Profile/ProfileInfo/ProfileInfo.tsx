@@ -4,6 +4,7 @@ import {Preloader} from '../../Common/Preloader/Preloader';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 import {ProfilePropsType} from '../Profile';
 import {ProfileStatusWithHooks} from './ProfileStatus/ProfileStatusWithHooks';
+import user_image from '../../../Assets/Images/user_image.png';
 
 export const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -18,7 +19,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
                         alt="Random from Internet"/>*/}
                 </div>
                 <div className={styles.description}>
-                    <img src={props.profile.photos? props.profile.photos.small : ''} alt="Profile ava"/>
+                    <img src={props.profile.photos.large || user_image} alt="Profile ava" className={styles.avatar}/>
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 </div>
             </div>

@@ -9,3 +9,8 @@
 .description{
     padding: 10px;
 }
+
+.avatar{
+    width: auto;
+    height: 300px;
+}
