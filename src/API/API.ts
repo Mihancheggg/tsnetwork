@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import {ProfileFromServerPropsType} from '../Redux/Reducers/ProfileReducer';
 
 //const baseUrl: string = `https://social-network.samuraijs.com/api/1.0`
 
@@ -39,6 +40,9 @@ export const profileAPI = {
         let formData = new FormData()
         formData.append('image', photo)
         return instance.put<File,AxiosResponse<ResponseType<SetPhotoResponseType>>>((`/profile/photo/`), formData,{headers:{'Content-Type': 'multipart/form-data'}})
+    },
+    saveProfile(profile: ProfileFromServerPropsType) {
+        return instance.put(`/profile/`, profile)
     }
 }
 
