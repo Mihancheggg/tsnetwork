@@ -18,11 +18,11 @@ export type MyPostsDataType = {
 export const MyPosts = React.memo(() => {
 
     const dispatch = useDispatch()
-    const myPostsData = useSelector<RootStateType,Array<PostType>>(state => state.profileReducer.myPostsData)
+    const myPostsData = useSelector<RootStateType, Array<PostType>>(state => state.profileReducer.myPostsData)
 
     let postsElements = myPostsData.map(item => <Post key={item.id} id={item.id}
-                                                            message={item.message}
-                                                            likes={item.likes}/>)
+                                                      message={item.message}
+                                                      likes={item.likes}/>)
 
     /*let newPostElement = React.createRef<HTMLTextAreaElement>();*/
 

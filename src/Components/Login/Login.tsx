@@ -31,7 +31,8 @@ let mapStateToProps = (state: AppPropsType): AuthStateType => {
         isAuth: state.authReducer.isAuth,
         userID: state.authReducer.userID,
         email: state.authReducer.email,
-        login: state.authReducer.login
+        login: state.authReducer.login,
+        captchaUrl: state.authReducer.captchaUrl
     }
 }
 

@@ -11,7 +11,7 @@ import style from './../../../Common/FormsControls/FormsControls.module.css'
 
 export const ProfileDataForm: React.FC<InjectedFormProps<ProfileFromServerPropsType>> = ({handleSubmit, error}) => {
 
-    const contacts = useSelector<RootStateType,any>(state => state.profileReducer.profile?.contacts)
+    const contacts = useSelector<RootStateType, any>(state => state.profileReducer.profile?.contacts)
 
     return (
         <form onSubmit={handleSubmit}>
@@ -32,10 +32,10 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileFromServerPropsT
             </div>
             <div>
                 <b>Contacts: </b> {Object.keys(contacts).map(key => {
-                    return <div key={key} className={styles.contact}>
-                        <b>{key.valueOf() + ':'}</b>
-                        {createField(key, 'contacts.' + key,'', Input, [])}
-                    </div>
+                return <div key={key} className={styles.contact}>
+                    <b>{key.valueOf() + ':'}</b>
+                    {createField(key, 'contacts.' + key, '', Input, [])}
+                </div>
             })}
             </div>
         </form>

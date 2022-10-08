@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {ProfileFromServerPropsType} from '../Redux/Reducers/ProfileReducer';
 
 //const baseUrl: string = `https://social-network.samuraijs.com/api/1.0`
@@ -12,6 +12,7 @@ const instance = axios.create({
     }
 })
 
+//APIs
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get(`/users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
@@ -39,7 +40,7 @@ export const profileAPI = {
     setPhoto(photo: File) {
         let formData = new FormData()
         formData.append('image', photo)
-        return instance.put<File,AxiosResponse<ResponseType<SetPhotoResponseType>>>((`/profile/photo/`), formData,{headers:{'Content-Type': 'multipart/form-data'}})
+        return instance.put<File, AxiosResponse<ResponseType<SetPhotoResponseType>>>((`/profile/photo/`), formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
     saveProfile(profile: ProfileFromServerPropsType) {
         return instance.put(`/profile/`, profile)
@@ -61,6 +62,13 @@ export const authAPI = {
     }
 }
 
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get(`/security/get-captcha-url`).then(response => response.data)
+    }
+}
+
+//types
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>

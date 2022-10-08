@@ -9,7 +9,7 @@ type ProfileDataPropsType = {
     toEditMode: () => void
 }
 
-export const ProfileData = ({profile, isOwner, toEditMode}:ProfileDataPropsType) => {
+export const ProfileData = ({profile, isOwner, toEditMode}: ProfileDataPropsType) => {
     return (
         <div>
             {isOwner && <button onClick={toEditMode} type={'button'}>Edit</button>}

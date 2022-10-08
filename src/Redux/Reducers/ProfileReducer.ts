@@ -97,7 +97,7 @@ export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): Th
     const userId = getState().authReducer.userID
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
-        if(userId){
+        if (userId) {
             dispatch(getUserProfileThunkCreator(userId.toString()))
         }
         return Promise.resolve(response.data.resultCode)
