@@ -21,8 +21,9 @@ export const ProfileInfo = (props: ProfilePropsType) => {
     }
 
     const onSubmit = (profile: ProfileFromServerPropsType) => {
-        props.saveProfile(profile)
-        setEditMode(false)
+        props.saveProfile(profile).then(() => {
+            setEditMode(false)
+        })
     }
 
     if (!props.profile) {

@@ -2,6 +2,7 @@ import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
 import {profileAPI} from '../../API/API';
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
+import {stopSubmit} from 'redux-form';
 
 
 //state
@@ -99,6 +100,11 @@ export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): Th
         if(userId){
             dispatch(getUserProfileThunkCreator(userId.toString()))
         }
+        return Promise.resolve(response.data.resultCode)
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Common error'
+        dispatch(stopSubmit('editProfile', {_error: message}))
+        return Promise.reject(response.data.resultCode)
     }
 }
 

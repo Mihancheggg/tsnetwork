@@ -17,8 +17,6 @@ export type MyPostsDataType = {
 
 export const MyPosts = React.memo(() => {
 
-    console.log('1')
-
     const dispatch = useDispatch()
     const myPostsData = useSelector<RootStateType,Array<PostType>>(state => state.profileReducer.myPostsData)
 

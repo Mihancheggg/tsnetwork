@@ -9,7 +9,7 @@ export type AdditionalProfilePropsType = {
     updateStatus: (status: string) => void,
     isOwner: boolean,
     setPhoto: (photo: File) => void
-    saveProfile: (profile: ProfileFromServerPropsType) => void
+    saveProfile: (profile: ProfileFromServerPropsType) => Promise<number>
 }
 
 export type ProfilePropsType = MapStateToPropsType & AdditionalProfilePropsType
