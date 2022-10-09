@@ -52,13 +52,14 @@ export const getMyProfileThunkCreator = (): ThunkType => async (dispatch: ThunkD
 }
 
 
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch: ThunkDispatchType) => {
-    let data = await authAPI.login(email, password, rememberMe)
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha?: string): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let data = await authAPI.login(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
         dispatch(getMyProfileThunkCreator())
-    }else if(data.resultCode === 10){
-        dispatch(getCaptchaUrlThunkCreator())
     } else {
+        if(data.resultCode === 10){
+            dispatch(getCaptchaUrlThunkCreator())
+        }
         let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
         dispatch(stopSubmit('Login', {_error: message}))
     }

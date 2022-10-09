@@ -11,7 +11,7 @@ type LoginPropsType = MapDispatchPropsType & AuthStateType
 const Login = (props: LoginPropsType) => {
 
     const onSubmit = (FormData: FormDataType) => {
-        props.loginThunkCreator(FormData.email, FormData.password, FormData.rememberMe)
+        props.loginThunkCreator(FormData.email, FormData.password, FormData.rememberMe, FormData.captcha)
     }
 
     if (props.isAuth) {
@@ -37,7 +37,7 @@ let mapStateToProps = (state: AppPropsType): AuthStateType => {
 }
 
 type MapDispatchPropsType = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean) => void,
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha?: string) => void,
     logoutThunkCreator: () => void,
 }
 
