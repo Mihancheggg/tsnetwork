@@ -9,9 +9,9 @@ import {useSelector} from 'react-redux';
 import {RootStateType} from '../../../../Redux/ReduxStore';
 import style from './../../../Common/FormsControls/FormsControls.module.css'
 
-export const ProfileDataForm: React.FC<InjectedFormProps<ProfileFromServerPropsType>> = ({handleSubmit, error}) => {
+export const ProfileDataForm: React.FC<InjectedFormProps<ProfileFromServerPropsType>> = ({initialValues, handleSubmit, error}) => {
 
-    const contacts = useSelector<RootStateType, any>(state => state.profileReducer.profile?.contacts)
+    // const contacts = useSelector<RootStateType, any>(state => state.profileReducer.profile?.contacts) alternative way to get contacts
 
     return (
         <form onSubmit={handleSubmit}>
@@ -31,7 +31,7 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileFromServerPropsT
                 <b>About me: </b> {createField('About me', 'aboutMe', '', Textarea, [])}
             </div>
             <div>
-                <b>Contacts: </b> {Object.keys(contacts).map(key => {
+                <b>Contacts: </b> {Object.keys(initialValues.contacts || {}).map(key => {
                 return <div key={key} className={styles.contact}>
                     <b>{key.valueOf() + ':'}</b>
                     {createField(key, 'contacts.' + key, '', Input, [])}

@@ -1,7 +1,7 @@
 import React, {lazy} from 'react';
 import './App.css';
 import {Navbar} from './Components/Navbar/Navbar';
-import {Route, withRouter} from 'react-router-dom';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {PostType} from './Components/Profile/MyPosts/Post/Post';
 import {Friends} from './Components/Friends/Friends';
 import {ProfileFromServerPropsType} from './Redux/Reducers/ProfileReducer';
@@ -16,8 +16,8 @@ import {withSuspense} from './HOC/withSuspense';
 // import {News} from './Components/News/News';
 // import {Music} from './Components/Music/Music';
 // import {Settings} from './Components/Settings/Settings';
-//import {UsersContainer} from './Components/Users/UsersContainer';
-//import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
+// import {UsersContainer} from './Components/Users/UsersContainer';
+// import {ProfileContainerAPI} from './Components/Profile/ProfileContainer';
 // import {LoginContainer} from './Components/Login/Login';
 const DialogsContainer = lazy(() =>
     import('./Components/Dialogs/DialogsContainer')
@@ -28,42 +28,27 @@ const ProfileContainerAPI = lazy(() =>
         .then(({ProfileContainerAPI}) => ({default: ProfileContainerAPI})),
 );
 const UsersContainer = lazy(() =>
-  import('./Components/Users/UsersContainer')
-    .then(({UsersContainer}) => ({default: UsersContainer})),
+    import('./Components/Users/UsersContainer')
+        .then(({UsersContainer}) => ({default: UsersContainer})),
 );
 const News = lazy(() =>
-  import('./Components/News/News')
-    .then(({News}) => ({default: News})),
+    import('./Components/News/News')
+        .then(({News}) => ({default: News})),
 );
 const Music = lazy(() =>
-  import('./Components/Music/Music')
-    .then(({Music}) => ({default: Music})),
+    import('./Components/Music/Music')
+        .then(({Music}) => ({default: Music})),
 );
 const Settings = lazy(() =>
-  import('./Components/Settings/Settings')
-    .then(({Settings}) => ({default: Settings})),
+    import('./Components/Settings/Settings')
+        .then(({Settings}) => ({default: Settings})),
 );
 const LoginContainer = lazy(() =>
-  import('./Components/Login/Login')
-    .then(({LoginContainer}) => ({default: LoginContainer})),
+    import('./Components/Login/Login')
+        .then(({LoginContainer}) => ({default: LoginContainer})),
 );
 
-
-/*export type ReduxToAppPropsType = {
-    state: RootStateType,
-    dispatch: (action: DialogsReducerActionTypes | ProfileReducerActionTypes) => void
-}*/
-
-export type ProfilePagePropsType = {
-    myPostsData: Array<PostType>,
-    profile: ProfileFromServerPropsType | null
-    status: string
-}
-
-export type AppPropsType = AppStateType & {
-    initializeApp: () => void
-}
-
+//component
 class App extends React.Component<AppPropsType, {}> {
 
     componentDidMount() {
@@ -81,20 +66,25 @@ class App extends React.Component<AppPropsType, {}> {
                 <HeaderContainerAPI/>
                 <Navbar/>
                 <div className="app-wrapper_content">
-                    {/*<Route path="/profile" component={Profile}/>
+                    <Switch>
+                        {/*<Route path="/profile" component={Profile}/>
                     <Route path="/settings" component={Settings}/>*/}
-                    <Route path="/profile/:userID?" render={() => {
-                        return <React.Suspense fallback={<div>Loading...</div>}>
-                            <ProfileContainerAPI/>
-                        </React.Suspense>
-                    }}/>
-                    <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
-                    <Route path="/users" render={withSuspense(UsersContainer)}/>
-                    <Route path="/news" render={withSuspense(News)}/>
-                    <Route path="/music" render={withSuspense(Music)}/>
-                    <Route path="/settings" render={withSuspense(Settings)}/>
-                    <Route path="/login" render={withSuspense(LoginContainer)}/>
-                    <Route path="/friends" render={() => <Friends/>}/>
+
+                        <Route path="/profile/:userID?" render={() => {
+                            return <React.Suspense fallback={<div>Loading...</div>}>
+                                <ProfileContainerAPI/>
+                            </React.Suspense>
+                        }}/>
+                        <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
+                        <Route path="/users" render={withSuspense(UsersContainer)}/>
+                        <Route path="/news" render={withSuspense(News)}/>
+                        <Route path="/music" render={withSuspense(Music)}/>
+                        <Route path="/settings" render={withSuspense(Settings)}/>
+                        <Route path="/login" render={withSuspense(LoginContainer)}/>
+                        <Route path="/friends" render={() => <Friends/>}/>
+                        <Route exact={true} path="/" render={()=> <Redirect to="/profile" />} />
+                        <Route path="/*" render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
             </div>
         );
@@ -106,3 +96,14 @@ const mapStateToProps = (state: RootStateType): AppStateType => ({
 })
 
 export default compose<React.FC>(connect(mapStateToProps, {initializeApp}), withRouter)(App);
+
+//types
+export type ProfilePagePropsType = {
+    myPostsData: Array<PostType>,
+    profile: ProfileFromServerPropsType | null
+    status: string
+}
+
+export type AppPropsType = AppStateType & {
+    initializeApp: () => void
+}
