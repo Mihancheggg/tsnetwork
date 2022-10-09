@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
 import {DialogsPropsType} from '../../Components/Dialogs/Dialogs';
 
-
+//initial state
 let initialState: DialogsPropsType = {
     dialogsData: [
         {id: v1(), name: 'Vasya', img: 'https://live.staticflickr.com/7572/26312703593_c983190d6c_b.jpg'},
@@ -28,14 +28,8 @@ let initialState: DialogsPropsType = {
     ]
 };
 
-export type DialogsReducerActionTypes = addMessageActionCreatorActionType
-
-type addMessageActionCreatorActionType = ReturnType<typeof addMessageActionCreator>
-
-export const addMessageActionCreator = (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
-
+//reducer
 export const dialogsReducer = (state: DialogsPropsType = initialState, action: DialogsReducerActionTypes): DialogsPropsType => {
-
     switch (action.type) {
         case 'ADD-MESSAGE':
             return {
@@ -50,3 +44,11 @@ export const dialogsReducer = (state: DialogsPropsType = initialState, action: D
             return state;
     }
 };
+
+//action creators
+export const addMessageActionCreator = (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
+
+//types
+export type DialogsReducerActionTypes = addMessageActionCreatorActionType
+
+type addMessageActionCreatorActionType = ReturnType<typeof addMessageActionCreator>

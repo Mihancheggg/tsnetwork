@@ -44,39 +44,57 @@ export const setCaptchaUrl = (captchaUrl: string) => {
 
 //thunk creators
 export const getMyProfileThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
-    let data = await authAPI.getMyProfile()
-    if (data.resultCode === 0) {
-        let {id, email, login} = data.data
-        dispatch(setAuthUserData(id, email, login, true))
-    }
-}
+    try {
+        let data = await authAPI.getMyProfile()
+        if (data.resultCode === 0) {
+            let {id, email, login} = data.data
+            dispatch(setAuthUserData(id, email, login, true))
+        }
+    } catch (e) {
 
+    }
+
+}
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha?: string): ThunkType => async (dispatch: ThunkDispatchType) => {
-    let data = await authAPI.login(email, password, rememberMe, captcha)
-    if (data.resultCode === 0) {
-        dispatch(getMyProfileThunkCreator())
-    } else {
-        if(data.resultCode === 10){
-            dispatch(getCaptchaUrlThunkCreator())
+    try {
+        let data = await authAPI.login(email, password, rememberMe, captcha)
+        if (data.resultCode === 0) {
+            dispatch(getMyProfileThunkCreator())
+        } else {
+            if (data.resultCode === 10) {
+                dispatch(getCaptchaUrlThunkCreator())
+            }
+            let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
+            dispatch(stopSubmit('Login', {_error: message}))
         }
-        let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
-        dispatch(stopSubmit('Login', {_error: message}))
+    } catch (e) {
+
     }
+
 }
 
-
 export const logoutThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
-    let data = await authAPI.logout()
-    if (data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false))
+    try {
+        let data = await authAPI.logout()
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false))
+        }
+    } catch (e) {
+
     }
+
 }
 
 export const getCaptchaUrlThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
-    let data = await securityAPI.getCaptchaUrl()
-    const captchaUrl = data.url
-    dispatch(setCaptchaUrl(captchaUrl))
+    try {
+        let data = await securityAPI.getCaptchaUrl()
+        const captchaUrl = data.url
+        dispatch(setCaptchaUrl(captchaUrl))
+    } catch (e) {
+
+    }
+
 }
 
 //types
