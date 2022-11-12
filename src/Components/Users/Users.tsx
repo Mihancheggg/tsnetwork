@@ -24,7 +24,10 @@ export const Users = (props: UsersComponentPropsType) => {
 
     return (
         <div>
-            <Paginator portionSize={10} pageSize={props.pageSize} totalUsersCount={props.totalUsersCount} currentPage={props.currentPage}
+            <Paginator portionSize={10}
+                       pageSize={props.pageSize}
+                       totalUsersCount={props.totalUsersCount}
+                       currentPage={props.currentPage}
                        onPageChanged={props.onPageChanged}/>
             {props.users.map(el => <User key={el.id} user={el} followingInProgress={props.followingInProgress}
                                          followUser={props.followUser} unfollowUser={props.unfollowUser}/>)}

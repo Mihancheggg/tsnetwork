@@ -111,7 +111,8 @@ let mapStateToProps = (state: AppPropsType): UsersType => {
 
 //let AuthRedirectComponent = withAuthRedirect(UsersClassContainer)
 
-export const UsersContainer = compose<React.FC>(connect(mapStateToProps, {
+export const UsersContainer = compose<React.FC>(connect<UsersType, MapDispatchPropsType, UsersType, AppPropsType>
+(mapStateToProps, {
         getUsers: getUsersThunkCreator,
         followUser: followUserThunkCreator,
         unfollowUser: unfollowUserThunkCreator,
