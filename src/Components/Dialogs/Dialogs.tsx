@@ -37,7 +37,7 @@ export const Dialogs = (props: DialogsContainerDataType) => {
         values.newMessage = ''
     }
 
-    let state = store.getState()
+    const state = store.getState()
 
     if (!state.authReducer.isAuth) return <Redirect to={'/login'}/>
 

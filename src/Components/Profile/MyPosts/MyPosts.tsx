@@ -15,12 +15,13 @@ export type MyPostsDataType = {
     updateNewPostText: (text: string) => void
 }
 
+// eslint-disable-next-line react/display-name
 export const MyPosts = React.memo(() => {
 
     const dispatch = useDispatch()
     const myPostsData = useSelector<RootStateType, Array<PostType>>(state => state.profileReducer.myPostsData)
 
-    let postsElements = myPostsData.map(item => <Post key={item.id} id={item.id}
+    const postsElements = myPostsData.map(item => <Post key={item.id} id={item.id}
                                                       message={item.message}
                                                       likes={item.likes}/>)
 

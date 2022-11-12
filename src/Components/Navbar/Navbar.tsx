@@ -12,7 +12,7 @@ type MenuItemType = {
 export const Navbar = () => {
 
 // for map
-    let menuItems: MenuItemsType = [
+    const menuItems: MenuItemsType = [
         {link: "/profile", name: 'Profile'},
         {link: "/dialogs", name: 'Messages'},
         {link: "/users", name: 'Users'},

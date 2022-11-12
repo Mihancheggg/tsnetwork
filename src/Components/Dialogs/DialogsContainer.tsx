@@ -53,7 +53,7 @@ type MapDispatchPropsType = {
     addMessage: (newMessage: string) => void
 }
 
-let mapStateToProps = (state: AppPropsType): DialogsPropsType => {
+const mapStateToProps = (state: AppPropsType): DialogsPropsType => {
     return {
         dialogsData: state.dialogsReducer.dialogsData,
         messagesData: state.dialogsReducer.messagesData,
@@ -61,7 +61,7 @@ let mapStateToProps = (state: AppPropsType): DialogsPropsType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         /*addMessage: () => {
             dispatch(addMessageActionCreator())

@@ -56,7 +56,7 @@ export const MyPostsContainer = (/!*props: MyPostsContainerDataType*!/) => {
     )
 }*/
 
-let mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
+const mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
     return {
         myPostsData: state.profileReducer.myPostsData,
         profile: state.profileReducer.profile,
@@ -64,7 +64,7 @@ let mapStateToProps = (state: AppPropsType): ProfilePagePropsType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addPost: (newPost: string) => {
             dispatch(addPostActionCreator(newPost))

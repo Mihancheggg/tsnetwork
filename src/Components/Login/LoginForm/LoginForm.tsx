@@ -1,5 +1,5 @@
 import React from 'react';
-import {InjectedFormProps, reduxForm} from 'redux-form';
+import { InjectedFormProps, reduxForm, submit } from 'redux-form';
 import {createField, Input} from '../../Common/FormsControls/FormsControls';
 import {requiredField} from '../../../Utils/Validators/validators';
 import styles from './../../Common/FormsControls/FormsControls.module.css'
@@ -14,8 +14,7 @@ export type FormDataType = {
 }
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
-
-    let captchaUrl = useSelector<RootStateType, string | null>(state => state.authReducer.captchaUrl)
+    const captchaUrl = useSelector<RootStateType, string | null>(state => state.authReducer.captchaUrl)
 
     return (
         <form onSubmit={handleSubmit}>

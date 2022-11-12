@@ -26,7 +26,7 @@ const Login = (props: LoginPropsType) => {
     );
 };
 
-let mapStateToProps = (state: AppPropsType): AuthStateType => {
+const mapStateToProps = (state: AppPropsType): AuthStateType => {
     return {
         isAuth: state.authReducer.isAuth,
         userID: state.authReducer.userID,

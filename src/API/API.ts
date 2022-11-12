@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios, {AxiosResponse} from 'axios';
 import {ProfileFromServerPropsType} from '../Redux/Reducers/ProfileReducer';
 
@@ -38,7 +39,7 @@ export const profileAPI = {
         return instance.put((`/profile/status/`), {status: status})
     },
     setPhoto(photo: File) {
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('image', photo)
         return instance.put<File, AxiosResponse<ResponseType<SetPhotoResponseType>>>((`/profile/photo/`), formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },

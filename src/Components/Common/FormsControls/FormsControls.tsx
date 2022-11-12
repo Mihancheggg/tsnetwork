@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import styles from './FormsControls.module.css'
 import {Field} from 'redux-form';
@@ -5,6 +6,7 @@ import {Field} from 'redux-form';
 const FormControl = ({input, meta:{touched, error},children, ...restProps}: any) => {
     const hasError = touched && error
     return (
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         <div className={`${styles.formControl} ${hasError && styles.error}`}>
             <div>
                 {children}

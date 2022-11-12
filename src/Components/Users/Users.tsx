@@ -18,7 +18,7 @@ type UsersComponentPropsType = {
 
 export const Users = (props: UsersComponentPropsType) => {
 
-    let state = store.getState()
+    const state = store.getState()
 
     if (!state.authReducer.isAuth) return <Redirect to={'/login'}/>
 
