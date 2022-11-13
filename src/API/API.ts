@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios, {AxiosResponse} from 'axios';
 import {ProfileFromServerPropsType} from '../Redux/Reducers/ProfileReducer';
 
@@ -29,10 +28,10 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getUserProfile(userID: string) {
+    getUserProfile(userID: number) {
         return instance.get(`/profile/${userID}`).then(response => response.data)
     },
-    getUserStatus(userID: string) {
+    getUserStatus(userID: number) {
         return instance.get(`/profile/status/${userID}`).then(response => response.data)
     },
     updateStatus(status: string) {

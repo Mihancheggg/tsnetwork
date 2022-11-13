@@ -1,7 +1,7 @@
-import {usersAPI} from '../../API/API';
-import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {CommonActionsType, RootStateType} from '../ReduxStore';
-import {updateObjectInArray} from '../../Utils/object-helpers';
+import { usersAPI } from '../../API/API';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { CommonActionsType, RootStateType } from '../ReduxStore';
+import { updateObjectInArray } from '../../Utils/object-helpers';
 
 //initial state
 let initialState: UsersType = {
@@ -12,7 +12,6 @@ let initialState: UsersType = {
     isFetching: false,
     followingInProgress: []
 }
-
 
 
 //reducer
@@ -126,7 +125,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): Thu
 
 }
 
-export const followUnfollowFlow = async (userID: number, dispatch: ThunkDispatchType, apiMethod: { (userID: number): Promise<any>}, action: {(userId: number): CommonActionsType}) => {
+export const followUnfollowFlow = async (userID: number, dispatch: ThunkDispatchType, apiMethod: { (userID: number): Promise<any> }, action: { (userId: number): CommonActionsType }) => {
     dispatch(toggleFollowingProgressAC(true, userID))
     let data = await apiMethod(userID)
     if (data.resultCode === 0) {
@@ -138,13 +137,13 @@ export const followUnfollowFlow = async (userID: number, dispatch: ThunkDispatch
 export const followUserThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
     const apiMethod = usersAPI.followUser.bind(usersAPI)
     const action = followUserAC
-    followUnfollowFlow(userID,dispatch,apiMethod,action)
+    await followUnfollowFlow(userID, dispatch, apiMethod, action)
 }
 
 export const unfollowUserThunkCreator = (userID: number): ThunkType => (dispatch: ThunkDispatchType) => {
     const apiMethod = usersAPI.unfollowUser.bind(usersAPI)
     const action = unfollowUserAC
-    followUnfollowFlow(userID,dispatch,apiMethod,action)
+    followUnfollowFlow(userID, dispatch, apiMethod, action)
 }
 
 //types

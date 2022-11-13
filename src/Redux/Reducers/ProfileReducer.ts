@@ -59,7 +59,7 @@ export const setStatus = (status: string) => {
 export const setPhotoAC = (photos: { large: string, small: string }) => ({type: 'SET-PHOTOS', photos} as const)
 
 //thunk creators
-export const getUserProfileThunkCreator = (userID: string): ThunkType => async (dispatch: ThunkDispatchType) => {
+export const getUserProfileThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
     try {
         let response = await profileAPI.getUserProfile(userID)
         dispatch(setUserProfile(response))
@@ -69,7 +69,7 @@ export const getUserProfileThunkCreator = (userID: string): ThunkType => async (
 
 }
 
-export const getStatusThunkCreator = (userID: string): ThunkType => async (dispatch: ThunkDispatchType) => {
+export const getStatusThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
     try {
         let response = await profileAPI.getUserStatus(userID)
         dispatch(setStatus(response))
@@ -109,7 +109,7 @@ export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): Th
         let response = await profileAPI.saveProfile(profile)
         if (response.data.resultCode === 0) {
             if (userId) {
-                dispatch(getUserProfileThunkCreator(userId.toString()))
+                dispatch(getUserProfileThunkCreator(userId))
             }
             return Promise.resolve(response.data.resultCode)
         } else {
