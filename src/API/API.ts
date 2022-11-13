@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProfileFromServerPropsType } from '../Redux/Reducers/ProfileReducer';
+import { UserType } from '../Redux/Reducers/UsersReducer';
 
 //const baseUrl: string = `https://social-network.samuraijs.com/api/1.0`
 
@@ -15,15 +16,15 @@ const instance = axios.create({
 //APIs
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
-        return instance.get<void, AxiosResponse<any>>(`/users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
+        return instance.get<void, AxiosResponse<GetUsersResponseType>>(`/users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
 
     followUser(userID: number) {
-        return instance.post<void, AxiosResponse<any>>(`/follow/${userID}`).then(response => response.data)
+        return instance.post<void, AxiosResponse<ResponseType<{}>>>(`/follow/${userID}`).then(response => response.data)
     },
 
     unfollowUser(userID: number) {
-        return instance.delete<void, AxiosResponse<any>>(`/follow/${userID}`).then(response => response.data)
+        return instance.delete<void, AxiosResponse<ResponseType<{}>>>(`/follow/${userID}`).then(response => response.data)
     }
 }
 
@@ -53,11 +54,11 @@ export const authAPI = {
             .then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string = '') {
-        return instance.post(`/auth/login`, {email, password, rememberMe, captcha})
+        return instance.post<LoginRequestType, AxiosResponse<ResponseType<LoginResponseType>>>(`/auth/login`, {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
     logout() {
-        return instance.delete(`/auth/login`)
+        return instance.delete<void, AxiosResponse<ResponseType>>(`/auth/login`)
             .then(response => response.data)
     }
 }
@@ -79,7 +80,24 @@ export type ResponseType<D = {}> = {
 export enum ResultCodesEnum {
     Success = 0,
     Error = 1,
+    CaptchaIsRequired = 10,
+}
 
+type GetUsersResponseType = {
+    items: Array<UserType>
+    totalCount: number
+    error: string
+}
+
+type LoginRequestType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: boolean
+}
+
+type LoginResponseType = {
+    userId: number
 }
 
 type UserProfileResponseType = {

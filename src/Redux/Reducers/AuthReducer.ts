@@ -62,7 +62,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
         if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(getMyProfileThunkCreator())
         } else {
-            if (data.resultCode === 10) {
+            if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
                 dispatch(getCaptchaUrlThunkCreator())
             }
             let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
