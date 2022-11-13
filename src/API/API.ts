@@ -1,5 +1,5 @@
-import axios, {AxiosResponse} from 'axios';
-import {ProfileFromServerPropsType} from '../Redux/Reducers/ProfileReducer';
+import axios, { AxiosResponse } from 'axios';
+import { ProfileFromServerPropsType } from '../Redux/Reducers/ProfileReducer';
 
 //const baseUrl: string = `https://social-network.samuraijs.com/api/1.0`
 
@@ -15,27 +15,27 @@ const instance = axios.create({
 //APIs
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
-        return instance.get(`/users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
+        return instance.get<void, AxiosResponse<any>>(`/users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
 
     followUser(userID: number) {
-        return instance.post(`/follow/${userID}`).then(response => response.data)
+        return instance.post<void, AxiosResponse<any>>(`/follow/${userID}`).then(response => response.data)
     },
 
     unfollowUser(userID: number) {
-        return instance.delete(`/follow/${userID}`).then(response => response.data)
+        return instance.delete<void, AxiosResponse<any>>(`/follow/${userID}`).then(response => response.data)
     }
 }
 
 export const profileAPI = {
     getUserProfile(userID: number) {
-        return instance.get(`/profile/${userID}`).then(response => response.data)
+        return instance.get<void, AxiosResponse<any>>(`/profile/${userID}`).then(response => response.data)
     },
     getUserStatus(userID: number) {
-        return instance.get(`/profile/status/${userID}`).then(response => response.data)
+        return instance.get<void, AxiosResponse<any>>(`/profile/status/${userID}`).then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put((`/profile/status/`), {status: status})
+        return instance.put<string, AxiosResponse<any>>((`/profile/status/`), {status: status})
     },
     setPhoto(photo: File) {
         const formData = new FormData()
@@ -43,13 +43,13 @@ export const profileAPI = {
         return instance.put<File, AxiosResponse<ResponseType<SetPhotoResponseType>>>((`/profile/photo/`), formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
     saveProfile(profile: ProfileFromServerPropsType) {
-        return instance.put(`/profile/`, profile)
+        return instance.put<ProfileFromServerPropsType, AxiosResponse<any>>(`/profile/`, profile)
     }
 }
 
 export const authAPI = {
     getMyProfile() {
-        return instance.get(`/auth/me`)
+        return instance.get<void, AxiosResponse<ResponseType<UserProfileResponseType>>>(`/auth/me`)
             .then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string = '') {
@@ -70,10 +70,22 @@ export const securityAPI = {
 
 //types
 export type ResponseType<D = {}> = {
-    resultCode: number
+    resultCode: ResultCodesEnum
     messages: Array<string>
     fieldsErrors: Array<string>
     data: D
+}
+
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+
+}
+
+type UserProfileResponseType = {
+    id: number
+    email: string
+    login: string
 }
 
 type SetPhotoResponseType = {

@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
 import {ProfilePagePropsType} from '../../App';
-import {profileAPI} from '../../API/API';
+import { profileAPI, ResultCodesEnum } from '../../API/API';
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
 import {stopSubmit} from 'redux-form';
 
@@ -82,7 +82,7 @@ export const getStatusThunkCreator = (userID: number): ThunkType => async (dispa
 export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: ThunkDispatchType) => {
     try {
         let response = await profileAPI.updateStatus(status)
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
             dispatch(setStatus(status))
         }
     } catch (e) {
@@ -94,7 +94,7 @@ export const updateStatusThunkCreator = (status: string): ThunkType => async (di
 export const setPhotoThunkCreator = (photo: File): ThunkType => async (dispatch: ThunkDispatchType) => {
     try {
         let response = await profileAPI.setPhoto(photo)
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
             dispatch(setPhotoAC(response.data.data.photos))
         }
     } catch (e) {
@@ -107,7 +107,7 @@ export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): Th
     const userId = getState().authReducer.userID
     try {
         let response = await profileAPI.saveProfile(profile)
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
             if (userId) {
                 dispatch(getUserProfileThunkCreator(userId))
             }

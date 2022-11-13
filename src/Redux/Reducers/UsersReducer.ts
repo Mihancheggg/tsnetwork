@@ -1,4 +1,4 @@
-import { usersAPI } from '../../API/API';
+import { ResultCodesEnum, usersAPI } from '../../API/API';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { CommonActionsType, RootStateType } from '../ReduxStore';
 import { updateObjectInArray } from '../../Utils/object-helpers';
@@ -128,7 +128,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): Thu
 export const followUnfollowFlow = async (userID: number, dispatch: ThunkDispatchType, apiMethod: { (userID: number): Promise<any> }, action: { (userId: number): CommonActionsType }) => {
     dispatch(toggleFollowingProgressAC(true, userID))
     let data = await apiMethod(userID)
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(action(userID))
     }
     dispatch(toggleFollowingProgressAC(false, userID))
