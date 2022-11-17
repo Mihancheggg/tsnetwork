@@ -1,9 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import styles from './FormsControls.module.css'
-import {Field} from 'redux-form';
+import { Field } from 'redux-form';
+import { FieldValidatorType } from '../../../Utils/Validators/validators';
 
-const FormControl = ({input, meta:{touched, error},children, ...restProps}: any) => {
+type FormsControlsParamPropsType = {
+    input: React.FC
+    meta: {
+        touched: boolean
+        error: string
+    }
+    children: React.ReactNode
+}
+
+const FormControl = ({input, meta: {touched, error}, children, ...restProps}: FormsControlsParamPropsType) => {
     const hasError = touched && error
     return (
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -34,7 +44,8 @@ export const Input = (props: any) => {
     )
 }
 
-export const createField = (placeholder: string | null, name: string,type: string, component: {(props: any): JSX.Element}, validators: any[], text?:string) => (
+export const createField = (placeholder: string | null, name: string, type: string, component: { (props: any): JSX.Element },
+                            validators: FieldValidatorType[], text?: string) => (
     <div>
         <Field name={name} component={component} type={type} placeholder={placeholder} validate={validators}/>{text}
     </div>
