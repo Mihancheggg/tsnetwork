@@ -44,12 +44,18 @@ export const Input = (props: any) => {
     )
 }
 
-export const createField = (placeholder: string | null, name: string, type: string, component: { (props: any): JSX.Element },
-                            validators: FieldValidatorType[], text?: string) => (
-    <div>
-        <Field name={name} component={component} type={type} placeholder={placeholder} validate={validators}/>{text}
-    </div>
-)
+export function createField<FormKeysType extends string>(placeholder: string | null,
+                                                         name: FormKeysType,
+                                                         type: string,
+                                                         component: { (props: any): JSX.Element },
+                                                         validators: FieldValidatorType[],
+                                                         text?: string) {
+    return (
+        <div>
+            <Field name={name} component={component} type={type} placeholder={placeholder} validate={validators}/>{text}
+        </div>
+    )
+}
 
 /*export const Textarea = ({input,meta,...props}: any) => {
     const hasError = meta.touched && meta.error

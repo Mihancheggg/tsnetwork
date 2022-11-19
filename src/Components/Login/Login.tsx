@@ -1,10 +1,10 @@
 import React from 'react';
-import {FormDataType, LoginReduxForm} from './LoginForm/LoginForm';
-import {compose} from 'redux';
-import {connect} from 'react-redux';
-import {AuthStateType, loginThunkCreator, logoutThunkCreator} from '../../Redux/Reducers/AuthReducer';
-import {Redirect} from 'react-router-dom';
-import {AppPropsType} from '../../Redux/ReduxStore';
+import { FormDataType, LoginReduxForm } from './LoginForm/LoginForm';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { AuthStateType, loginThunkCreator, logoutThunkCreator } from '../../Redux/Reducers/AuthReducer';
+import { Redirect } from 'react-router-dom';
+import { AppPropsType } from '../../Redux/ReduxStore';
 
 type LoginPropsType = MapDispatchPropsType & AuthStateType
 
@@ -52,4 +52,7 @@ type MapDispatchPropsType = {
     }
 }*/
 
-export const LoginContainer = compose<React.FC>(connect(mapStateToProps, {loginThunkCreator, logoutThunkCreator}))(Login)
+export const LoginContainer = compose<React.FC>(connect(mapStateToProps, {
+    loginThunkCreator,
+    logoutThunkCreator
+}))(Login)

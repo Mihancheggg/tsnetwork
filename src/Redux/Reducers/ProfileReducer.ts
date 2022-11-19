@@ -1,8 +1,8 @@
-import {v1} from 'uuid';
-import {ProfilePagePropsType} from '../../App';
+import { v1 } from 'uuid';
+import { ProfilePagePropsType } from '../../App';
 import { profileAPI, ResultCodesEnum } from '../../API/API';
-import {ThunkDispatchType, ThunkType} from './UsersReducer';
-import {stopSubmit} from 'redux-form';
+import { ThunkDispatchType, ThunkType } from './UsersReducer';
+import { stopSubmit } from 'redux-form';
 
 //state
 let initialState: ProfilePagePropsType = {
@@ -145,6 +145,8 @@ export type ProfileFromServerPropsType = {
         small?: string,
     }
 }
+
+export type ProfileDataTypeKeys = Extract<keyof ProfileFromServerPropsType, string>
 
 export type ProfileReducerActionTypes = AddPostActionType
     | setUserProfileType
