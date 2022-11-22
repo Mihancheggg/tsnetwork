@@ -1,7 +1,8 @@
-import { ResultCodesEnum, usersAPI } from '../../API/API';
+import { ResultCodesEnum } from '../../API/API';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { CommonActionsType, RootStateType } from '../ReduxStore';
 import { updateObjectInArray } from '../../Utils/object-helpers';
+import { usersAPI } from '../../API/UsersAPI';
 
 //initial state
 let initialState: UsersType = {

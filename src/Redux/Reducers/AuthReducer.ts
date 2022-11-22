@@ -1,6 +1,8 @@
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
-import { authAPI, ResultCodesEnum, securityAPI } from '../../API/API';
+import { ResultCodesEnum} from '../../API/API';
 import {stopSubmit} from 'redux-form';
+import { authAPI } from '../../API/AuthAPI';
+import { securityAPI } from '../../API/SecurityAPI';
 
 //initial state
 let initialState: AuthStateType = {

@@ -1,8 +1,9 @@
 import { v1 } from 'uuid';
 import { ProfilePagePropsType } from '../../App';
-import { profileAPI, ResultCodesEnum } from '../../API/API';
+import { ResultCodesEnum } from '../../API/API';
 import { ThunkDispatchType, ThunkType } from './UsersReducer';
 import { stopSubmit } from 'redux-form';
+import { profileAPI } from '../../API/ProfileAPI';
 
 //state
 let initialState: ProfilePagePropsType = {
