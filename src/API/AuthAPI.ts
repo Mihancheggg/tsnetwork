@@ -1,6 +1,8 @@
+//imports
 import { AxiosResponse } from 'axios';
 import { instance, ResponseType } from './API';
 
+//api
 export const authAPI = {
     getMyProfile() {
         return instance.get<void, AxiosResponse<ResponseType<UserProfileResponseType>>>(`/auth/me`)
@@ -21,6 +23,7 @@ export const authAPI = {
     }
 }
 
+//types
 type LoginRequestType = {
     email: string
     password: string

@@ -82,8 +82,8 @@ export const getStatusThunkCreator = (userID: number): ThunkType => async (dispa
 
 export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: ThunkDispatchType) => {
     try {
-        let response = await profileAPI.updateStatus(status)
-        if (response.data.resultCode === ResultCodesEnum.Success) {
+        let data = await profileAPI.updateStatus(status)
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(setStatus(status))
         }
     } catch (e) {
@@ -94,9 +94,9 @@ export const updateStatusThunkCreator = (status: string): ThunkType => async (di
 
 export const setPhotoThunkCreator = (photo: File): ThunkType => async (dispatch: ThunkDispatchType) => {
     try {
-        let response = await profileAPI.setPhoto(photo)
-        if (response.data.resultCode === ResultCodesEnum.Success) {
-            dispatch(setPhotoAC(response.data.data.photos))
+        let data = await profileAPI.setPhoto(photo)
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(setPhotoAC(data.data.photos))
         }
     } catch (e) {
 
@@ -107,16 +107,16 @@ export const setPhotoThunkCreator = (photo: File): ThunkType => async (dispatch:
 export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): ThunkType => async (dispatch: ThunkDispatchType, getState) => {
     const userId = getState().authReducer.userID
     try {
-        let response = await profileAPI.saveProfile(profile)
-        if (response.data.resultCode === ResultCodesEnum.Success) {
+        let data = await profileAPI.saveProfile(profile)
+        if (data.resultCode === ResultCodesEnum.Success) {
             if (userId) {
                 dispatch(getUserProfileThunkCreator(userId))
             }
-            return Promise.resolve(response.data.resultCode)
+            return Promise.resolve(data.resultCode)
         } else {
-            let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Common error'
+            let message = data.messages.length > 0 ? data.messages[0] : 'Common error'
             dispatch(stopSubmit('editProfile', {_error: message}))
-            return Promise.reject(response.data.resultCode)
+            return Promise.reject(data.resultCode)
         }
     } catch (e) {
 
