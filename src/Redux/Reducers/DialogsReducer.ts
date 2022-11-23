@@ -1,3 +1,4 @@
+//imports
 import {v1} from 'uuid';
 import {DialogsPropsType} from '../../Components/Dialogs/Dialogs';
 
@@ -31,7 +32,7 @@ let initialState: DialogsPropsType = {
 //reducer
 export const dialogsReducer = (state: DialogsPropsType = initialState, action: DialogsReducerActionTypes): DialogsPropsType => {
     switch (action.type) {
-        case 'ADD-MESSAGE':
+        case 'TSN/DIALOGS/ADD_MESSAGE':
             return {
                 ...state, messagesData: [...state.messagesData, {
                     id: v1(),
@@ -46,7 +47,7 @@ export const dialogsReducer = (state: DialogsPropsType = initialState, action: D
 };
 
 //action creators
-export const addMessageActionCreator = (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
+export const addMessageActionCreator = (newMessage: string) => ({type: 'TSN/DIALOGS/ADD_MESSAGE', newMessage} as const)
 
 //types
 export type DialogsReducerActionTypes = addMessageActionCreatorActionType

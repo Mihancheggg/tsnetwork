@@ -1,3 +1,4 @@
+//imports
 import { v1 } from 'uuid';
 import { ProfilePagePropsType } from '../../App';
 import { ResultCodesEnum } from '../../API/API';
@@ -5,7 +6,7 @@ import { ThunkDispatchType, ThunkType } from './UsersReducer';
 import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../../API/ProfileAPI';
 
-//state
+//initial state
 let initialState: ProfilePagePropsType = {
     myPostsData: [
         {id: v1(), message: 'Hi, how are you?', likes: 22},
@@ -20,7 +21,7 @@ let initialState: ProfilePagePropsType = {
 //reducer
 export const profileReducer = (state: ProfilePagePropsType = initialState, action: ProfileReducerActionTypes): ProfilePagePropsType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case 'TSN/PROFILE/ADD_POST':
             return {
                 ...state, myPostsData: [...state.myPostsData,
                     {
@@ -29,11 +30,11 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
                         likes: 0
                     }]
             }
-        case 'DELETE-POST':
+        case 'TSN/PROFILE/DELETE_POST':
             return {...state, myPostsData: state.myPostsData.filter(el => el.id !== action.postId)}
-        case 'SET-USER-PROFILE':
+        case 'TSN/PROFILE/SET_USER_PROFILE':
             return {...state, profile: action.profile}
-        case 'SET-STATUS': {
+        case 'TSN/PROFILE/SET_STATUS': {
             return {...state, status: action.status}
         }
         case 'SET-PHOTOS': {
@@ -45,16 +46,17 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
     }
 };
 
-//actionCreators
-export const addPostActionCreator = (newPost: string) => ({type: 'ADD-POST', newPost} as const)
+//action creators
+export const addPostActionCreator = (newPost: string) => ({type: 'TSN/PROFILE/ADD_POST', newPost} as const)
 
-export const deletePostActionCreator = (postId: string) => ({type: 'DELETE-POST', postId} as const)
+export const deletePostActionCreator = (postId: string) => ({type: 'TSN/PROFILE/DELETE_POST', postId} as const)
 
 export const setUserProfile = (profile: ProfileFromServerPropsType) => {
-    return {type: 'SET-USER-PROFILE', profile} as const;
+    return {type: 'TSN/PROFILE/SET_USER_PROFILE', profile} as const;
 }
+
 export const setStatus = (status: string) => {
-    return {type: 'SET-STATUS', status} as const;
+    return {type: 'TSN/PROFILE/SET_STATUS', status} as const;
 }
 
 export const setPhotoAC = (photos: { large: string, small: string }) => ({type: 'SET-PHOTOS', photos} as const)
@@ -67,7 +69,6 @@ export const getUserProfileThunkCreator = (userID: number): ThunkType => async (
     } catch (e) {
 
     }
-
 }
 
 export const getStatusThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -77,7 +78,6 @@ export const getStatusThunkCreator = (userID: number): ThunkType => async (dispa
     } catch (e) {
 
     }
-
 }
 
 export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -89,7 +89,6 @@ export const updateStatusThunkCreator = (status: string): ThunkType => async (di
     } catch (e) {
 
     }
-
 }
 
 export const setPhotoThunkCreator = (photo: File): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -101,7 +100,6 @@ export const setPhotoThunkCreator = (photo: File): ThunkType => async (dispatch:
     } catch (e) {
 
     }
-
 }
 
 export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): ThunkType => async (dispatch: ThunkDispatchType, getState) => {
@@ -121,7 +119,6 @@ export const saveProfileThunkCreator = (profile: ProfileFromServerPropsType): Th
     } catch (e) {
 
     }
-
 }
 
 //types
