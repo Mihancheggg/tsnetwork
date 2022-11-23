@@ -1,3 +1,4 @@
+//imports
 import {ThunkDispatchType, ThunkType} from './UsersReducer';
 import { ResultCodesEnum} from '../../API/API';
 import {stopSubmit} from 'redux-form';
@@ -16,9 +17,9 @@ let initialState: AuthStateType = {
 //reducer
 export const authReducer = (state: AuthStateType = initialState, action: AuthReducerActionTypes): AuthStateType => {
     switch (action.type) {
-        case 'SET-AUTH-USER-DATA':
+        case 'TSN/AUTH/SET_AUTH_USER_DATA':
             return {...state, ...action.payload}
-        case 'SET-CAPTCHA-URL':
+        case 'TSN/AUTH/SET_CAPTCHA_URL':
             return {...state, captchaUrl: action.payload.captchaUrl}
         default:
             return state
@@ -28,7 +29,7 @@ export const authReducer = (state: AuthStateType = initialState, action: AuthRed
 //action creators
 export const setAuthUserData = (userID: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
-        type: 'SET-AUTH-USER-DATA',
+        type: 'TSN/AUTH/SET_AUTH_USER_DATA',
         payload: {
             userID, email, login, isAuth
         }
@@ -37,7 +38,7 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
 
 export const setCaptchaUrl = (captchaUrl: string) => {
     return {
-        type: 'SET-CAPTCHA-URL',
+        type: 'TSN/AUTH/SET_CAPTCHA_URL',
         payload: {
             captchaUrl
         }
@@ -55,7 +56,6 @@ export const getMyProfileThunkCreator = (): ThunkType => async (dispatch: ThunkD
     } catch (e) {
 
     }
-
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha?: string): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -73,7 +73,6 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
     } catch (e) {
 
     }
-
 }
 
 export const logoutThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -85,7 +84,6 @@ export const logoutThunkCreator = (): ThunkType => async (dispatch: ThunkDispatc
     } catch (e) {
 
     }
-
 }
 
 export const getCaptchaUrlThunkCreator = (): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -96,7 +94,6 @@ export const getCaptchaUrlThunkCreator = (): ThunkType => async (dispatch: Thunk
     } catch (e) {
 
     }
-
 }
 
 //types
@@ -111,4 +108,5 @@ export type AuthStateType = {
 export type AuthReducerActionTypes = setAuthUserDataType | setCaptchaUrlType
 
 type setAuthUserDataType = ReturnType<typeof setAuthUserData>
+
 type setCaptchaUrlType = ReturnType<typeof setCaptchaUrl>
