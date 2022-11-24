@@ -1,7 +1,15 @@
-let initialState = {}
+let initialState: SidebarStateType = {
+    sidebar: null
+}
 
-export type SidebarReducerActionsType = any
+export type SidebarReducerActionsType = {
+    type: 'YO'
+}
 
-export const sidebarReducer = (state: any = initialState, action: SidebarReducerActionsType): any => {
+export const sidebarReducer = (state: SidebarStateType = initialState, action: SidebarReducerActionsType): SidebarStateType => {
     return state;
 };
+
+export type SidebarStateType = {
+    sidebar: number | null
+}

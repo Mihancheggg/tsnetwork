@@ -37,7 +37,7 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
         case 'TSN/PROFILE/SET_STATUS': {
             return {...state, status: action.status}
         }
-        case 'SET-PHOTOS': {
+        case 'TSN/PROFILE/SET_PHOTOS': {
             // @ts-ignore
             return {...state, profile: {...state.profile, photos: action.photos}}
         }
@@ -59,7 +59,7 @@ export const setStatus = (status: string) => {
     return {type: 'TSN/PROFILE/SET_STATUS', status} as const;
 }
 
-export const setPhotoAC = (photos: { large: string, small: string }) => ({type: 'SET-PHOTOS', photos} as const)
+export const setPhotoAC = (photos: { large: string, small: string }) => ({type: 'TSN/PROFILE/SET_PHOTOS', photos} as const)
 
 //thunk creators
 export const getUserProfileThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {

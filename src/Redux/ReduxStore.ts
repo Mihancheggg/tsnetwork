@@ -2,11 +2,11 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { profileReducer, ProfileReducerActionTypes } from './Reducers/ProfileReducer';
 import { dialogsReducer, DialogsReducerActionTypes } from './Reducers/DialogsReducer';
 import { sidebarReducer, SidebarReducerActionsType } from './Reducers/SidebarReducer';
-import { usersReducer } from './Reducers/UsersReducer';
+import { usersReducer, UsersReducerActionTypes } from './Reducers/UsersReducer';
 import { authReducer, AuthReducerActionTypes } from './Reducers/AuthReducer';
 import thunkMiddleware from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form';
-import { appReducer } from './Reducers/AppReducer';
+import { appReducer, AppReducerActionTypes } from './Reducers/AppReducer';
 
 let rootReducer = combineReducers({
     profileReducer,
@@ -27,11 +27,12 @@ export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(t
 export type RootStateType = ReturnType<typeof store.getState>
 export type ReduxStoreType = typeof store;
 export type AppPropsType = ReturnType<typeof rootReducer>
-export type CommonActionsType = RootStateType
-    | ProfileReducerActionTypes
+export type CommonActionsType = ProfileReducerActionTypes
     | DialogsReducerActionTypes
     | AuthReducerActionTypes
     | SidebarReducerActionsType
+    | AppReducerActionTypes
+    | UsersReducerActionTypes
 
 // @ts-ignore
 window.__store__ = store

@@ -1,3 +1,4 @@
+//imports
 import { ResultCodesEnum } from '../../API/API';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { CommonActionsType, RootStateType } from '../ReduxStore';
@@ -18,7 +19,7 @@ let initialState: UsersType = {
 //reducer
 export const usersReducer = (state: UsersType = initialState, action: UsersReducerActionTypes): UsersType => {
     switch (action.type) {
-        case 'FOLLOW-USER': {
+        case 'TSN/USERS/FOLLOW_USER': {
             /*let newState = {
                 ...state,
                 users: state.users.map(el => el.id === action.userId ? ({...el, followed: true}) : el)
@@ -26,7 +27,7 @@ export const usersReducer = (state: UsersType = initialState, action: UsersReduc
             let newState = {...state, users: updateObjectInArray(state.users, action.userId, {followed: true})}
             return newState
         }
-        case 'UNFOLLOW-USER': {
+        case 'TSN/USERS/UNFOLLOW_USER': {
             /*let newState = {
                 ...state,
                 users: state.users.map(el => el.id === action.userId ? ({...el, followed: false}) : el)
@@ -34,19 +35,19 @@ export const usersReducer = (state: UsersType = initialState, action: UsersReduc
             let newState = {...state, users: updateObjectInArray(state.users, action.userId, {followed: false})}
             return newState
         }
-        case 'SET-USERS': {
+        case 'TSN/USERS/SET_USERS': {
             return {...state, users: action.users}
         }
-        case 'SET-CURRENT-PAGE': {
+        case 'TSN/USERS/SET_CURRENT_PAGE': {
             return {...state, currentPage: action.payload.pageNumber}
         }
-        case 'SET-TOTAL-USERS-COUNT': {
+        case 'TSN/USERS/SET_TOTAL_USERS_COUNT': {
             return {...state, totalUsersCount: action.payload.usersCount}
         }
-        case 'TOGGLE-FETCHING': {
+        case 'TSN/USERS/TOGGLE_FETCHING': {
             return {...state, isFetching: action.payload.isFetching}
         }
-        case 'TOGGLE-FOLLOWING-PROGRESS': {
+        case 'TSN/USERS/TOGGLE_FOLLOWING_PROGRESS': {
             return action.payload.isFetching
                 ? {...state, followingInProgress: [...state.followingInProgress, action.payload.userID]}
                 : {...state, followingInProgress: state.followingInProgress.filter(id => id !== action.payload.userID)}
@@ -59,28 +60,28 @@ export const usersReducer = (state: UsersType = initialState, action: UsersReduc
 //action creators
 export const followUserAC = (userId: number) => {
     return {
-        type: 'FOLLOW-USER',
+        type: 'TSN/USERS/FOLLOW_USER',
         userId: userId
     } as const
 }
 
 export const unfollowUserAC = (userId: number) => {
     return {
-        type: 'UNFOLLOW-USER',
+        type: 'TSN/USERS/UNFOLLOW_USER',
         userId: userId
     } as const
 }
 
 export const setUsersAC = (users: Array<UserType>) => {
     return {
-        type: 'SET-USERS',
+        type: 'TSN/USERS/SET_USERS',
         users
     } as const
 }
 
 export const setCurrentPageAC = (pageNumber: number) => {
     return {
-        type: 'SET-CURRENT-PAGE',
+        type: 'TSN/USERS/SET_CURRENT_PAGE',
         payload: {
             pageNumber
         }
@@ -89,7 +90,7 @@ export const setCurrentPageAC = (pageNumber: number) => {
 
 export const setTotalUsersCountAC = (usersCount: number) => {
     return {
-        type: 'SET-TOTAL-USERS-COUNT',
+        type: 'TSN/USERS/SET_TOTAL_USERS_COUNT',
         payload: {
             usersCount
         }
@@ -98,7 +99,7 @@ export const setTotalUsersCountAC = (usersCount: number) => {
 
 export const toggleFetchingAC = (isFetching: boolean) => {
     return {
-        type: 'TOGGLE-FETCHING',
+        type: 'TSN/USERS/TOGGLE_FETCHING',
         payload: {
             isFetching
         }
@@ -107,7 +108,7 @@ export const toggleFetchingAC = (isFetching: boolean) => {
 
 export const toggleFollowingProgressAC = (isFetching: boolean, userID: number) => {
     return {
-        type: 'TOGGLE-FOLLOWING-PROGRESS',
+        type: 'TSN/USERS/TOGGLE_FOLLOWING_PROGRESS',
         payload: {
             isFetching,
             userID

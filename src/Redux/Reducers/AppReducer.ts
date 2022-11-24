@@ -1,8 +1,8 @@
 //imports
-import {ThunkType} from './UsersReducer';
-import {Dispatch} from 'redux';
-import {getMyProfileThunkCreator} from './AuthReducer';
-import {CommonActionsType} from '../ReduxStore';
+import { ThunkDispatchType, ThunkType } from './UsersReducer';
+import { Dispatch } from 'redux';
+import { getMyProfileThunkCreator } from './AuthReducer';
+import { CommonActionsType } from '../ReduxStore';
 
 //const(Redux-ducks principle)
 const SET_INITIALIZED = 'TSN/APP/SET_INITIALIZED'
@@ -28,9 +28,9 @@ export const setInitialized = () => {
 }
 
 //thunk creator
-export const initializeApp = (): ThunkType => (dispatch: Dispatch<CommonActionsType>) => {
+export const initializeApp = (): ThunkType => (dispatch: ThunkDispatchType) => {
     let promise = dispatch(getMyProfileThunkCreator())
-    Promise.all([promise]).then(()=> {
+    Promise.all([promise]).then(() => {
         dispatch(setInitialized())
     })
 }
