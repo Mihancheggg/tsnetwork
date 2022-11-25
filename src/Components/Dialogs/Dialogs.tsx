@@ -39,7 +39,7 @@ export const Dialogs = (props: DialogsContainerDataType) => {
 
     const state = store.getState()
 
-    if (!state.authReducer.isAuth) return <Redirect to={'/login'}/>
+    //if (!state.authReducer.isAuth) return <Redirect to={'/login'}/> - делаем в контейнере
 
     return (
         <div className={styles.dialogs}>
