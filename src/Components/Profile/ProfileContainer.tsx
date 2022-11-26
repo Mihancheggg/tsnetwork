@@ -25,7 +25,7 @@ type MapDispatchToPropsType = {
     getUserProfile: (userID: string) => void
     getUserStatus: (userID: string) => void
     updateStatus: (status: string) => void
-    setPhoto: (photo: any) => void
+    setPhoto: (photo: File) => void
     saveProfile: (profile: ProfileFromServerPropsType) => Promise<number>
 }
 

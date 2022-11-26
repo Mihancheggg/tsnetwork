@@ -17,10 +17,10 @@ export function withAuthRedirect<T>(Component: React.FC<T>){
     const RedirectComponent = (props: MapStateToPropsForRedirectType) => {
         const {isAuth, ...restProps} = props
         if (!isAuth) return <Redirect to={'/login'}/>
-        // @ts-ignore
+         // @ts-ignore
         return <Component {...restProps as T}/>
     }
-    const ConnectedRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent)
+    const ConnectedRedirectComponent = connect<MapStateToPropsForRedirectType, {}, T, AppPropsType>(mapStateToPropsForRedirect)(RedirectComponent)
     return ConnectedRedirectComponent
 }
 

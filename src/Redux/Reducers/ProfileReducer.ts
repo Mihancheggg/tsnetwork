@@ -59,7 +59,10 @@ export const setStatus = (status: string) => {
     return {type: 'TSN/PROFILE/SET_STATUS', status} as const;
 }
 
-export const setPhotoAC = (photos: { large: string, small: string }) => ({type: 'TSN/PROFILE/SET_PHOTOS', photos} as const)
+export const setPhotoAC = (photos: { large: string, small: string }) => ({
+    type: 'TSN/PROFILE/SET_PHOTOS',
+    photos
+} as const)
 
 //thunk creators
 export const getUserProfileThunkCreator = (userID: number): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -144,7 +147,7 @@ export type ProfileFromServerPropsType = {
     }
 }
 
-export type ProfileDataTypeKeys = Extract<keyof ProfileFromServerPropsType, string>
+export type GetStringKeys<T> = Extract<keyof T, string>
 
 export type ProfileReducerActionTypes = AddPostActionType
     | setUserProfileType

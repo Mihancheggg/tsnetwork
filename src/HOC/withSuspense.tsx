@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const withSuspense = (Component: React.FC) => {
+export function withSuspense<WrappedProps>(Component: React.FC<WrappedProps>) {
     return (props: any) => {
         return (
             <React.Suspense fallback={<div>Loading...</div>}>
@@ -8,4 +8,4 @@ export const withSuspense = (Component: React.FC) => {
             </React.Suspense>
         )
     }
-};
+}

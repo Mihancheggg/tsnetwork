@@ -70,7 +70,7 @@ class UsersClassContainer extends React.Component<UsersContainerDataType, {}> {
 }
 
 type MapDispatchPropsType = {
-    getUsers: (currentPage: number, pageSize: number) => any
+    getUsers: (currentPage: number, pageSize: number) => void
     followUser: (userID: number) => void
     unfollowUser: (userID: number) => void
 }
