@@ -40,6 +40,7 @@ class ProfileClassContainer extends React.Component<ProfileContainerPropsType, {
         if (!userID) {
             userID = this.props.authed !== null ? this.props.authed.toString() : ''
             if (!userID) {
+                //may be replaced with redirect?
                 this.props.history.push('/login')
             }
         }

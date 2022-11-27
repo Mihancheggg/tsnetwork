@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './MyPosts.module.css'
 import {Post, PostType} from './Post/Post';
-import {FormDataType, NewPostReduxForm} from './NewPostForm/NewPostForm';
+import {AddPostFormType, NewPostReduxForm} from './NewPostForm/NewPostForm';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../../Redux/ReduxStore';
 import {addPostActionCreator} from '../../../Redux/Reducers/ProfileReducer';
@@ -27,7 +27,7 @@ export const MyPosts = React.memo(() => {
 
     /*let newPostElement = React.createRef<HTMLTextAreaElement>();*/
 
-    const addPost = (values: FormDataType) => {
+    const addPost = (values: AddPostFormType) => {
         /*props.addPost(values.newPost)*/
         dispatch(addPostActionCreator(values.newPost))
         values.newPost = ''

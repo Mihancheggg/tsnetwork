@@ -1,11 +1,9 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
-import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
-import {MessageItem, MessageItemType} from './MessageItem/MessageItem';
-import {DialogsContainerDataType} from './DialogsContainer';
-import {Redirect} from 'react-router-dom';
-import {store} from '../../Redux/ReduxStore';
-import {FormDataType, NewMessageReduxForm} from './NewMessageForm/NewMessageForm';
+import { DialogItem, DialogItemType } from './DialogItem/DialogItem';
+import { MessageItem, MessageItemType } from './MessageItem/MessageItem';
+import { DialogsContainerDataType } from './DialogsContainer';
+import { FormDataType, NewMessageReduxForm } from './NewMessageForm/NewMessageForm';
 
 /*export type DialogsPageDataType = {
     //dialogsPageData: DialogsPropsType
@@ -36,8 +34,6 @@ export const Dialogs = (props: DialogsContainerDataType) => {
         props.addMessage(values.newMessage)
         values.newMessage = ''
     }
-
-    const state = store.getState()
 
     //if (!state.authReducer.isAuth) return <Redirect to={'/login'}/> - делаем в контейнере
 
